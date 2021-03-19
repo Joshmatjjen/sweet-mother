@@ -1,0 +1,24 @@
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  },
+  "plugins": [
+    // "transform-remove-console",
+    [
+      "dotenv-import",
+      {
+        "moduleName": "@env",
+        "path": ".env",
+        "blacklist": [
+          "GITHUB_TOKEN"
+        ],
+        "whitelist": null,
+        "safe": true,
+        "allowUndefined": true
+      }
+    ]
+  ]
+}
