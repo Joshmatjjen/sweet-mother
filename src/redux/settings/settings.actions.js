@@ -1,8 +1,12 @@
-import SettingsActionTypes from './settings.types';
+import SettingsActionTypes from "./settings.types";
 
-export const setTheme = (mode) => ({
-  type: SettingsActionTypes.SET_THEME,
+export const setLanguage = (mode) => ({
+  type: SettingsActionTypes.SET_LANGUAGE,
   payload: mode,
+});
+export const setLocaleData = (data) => ({
+  type: SettingsActionTypes.SET_LOCALE_DATA,
+  payload: data,
 });
 export const onScroll = (cond) => ({
   type: SettingsActionTypes.ON_SCROLL,

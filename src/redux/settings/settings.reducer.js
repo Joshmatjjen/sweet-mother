@@ -1,7 +1,8 @@
 import SettingsActionTypes from './settings.types';
 
 const INITIAL_STATE = {
-  themeMode: 'Dark',
+  language: 'en-US',
+  localeData: {},
   onScroll: null,
   speedDownloadActive: false,
   netState: true,
@@ -19,15 +20,15 @@ const INITIAL_STATE = {
 
 const settingsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SettingsActionTypes.SET_WP_STAT:
+    case SettingsActionTypes.SET_LANGUAGE:
       return {
         ...state,
-        wpStat: action.payload,
+        language: action.payload,
       };
-    case SettingsActionTypes.SET_THEME:
+    case SettingsActionTypes.SET_LOCALE_DATA:
       return {
         ...state,
-        themeMode: action.payload,
+        localeData: action.payload,
       };
     case SettingsActionTypes.SET_MONT:
       return {

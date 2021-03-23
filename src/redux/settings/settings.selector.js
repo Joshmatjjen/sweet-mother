@@ -2,9 +2,13 @@ import { createSelector } from 'reselect';
 
 const selectSettings = (state) => state.settings;
 
-export const selectThemeMode = createSelector(
+export const selectLanguage = createSelector(
   [selectSettings],
-  (settings) => settings.themeMode,
+  (settings) => settings.language,
+);
+export const selectLocaleData = createSelector(
+  [selectSettings],
+  (settings) => settings.localeData,
 );
 export const selectIntro = createSelector(
   [selectSettings],

@@ -1,5 +1,5 @@
 module.exports = {
   root: true,
-  extends: 'expo/native',
+  extends: '@react-native-community',
   rules: { 'react-native/no-inline-styles': 0 },
 };
