@@ -1,5 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';c
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -9,40 +9,38 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
-} from "react-native";
-import normalize from "../../utils/normalize";
-import { Icon } from "react-native-elements";
-import i18n from "i18n-js";
-import ImageCard from "../../components/imageCard";
-import { createStructuredSelector } from "reselect";
-import { connect } from "react-redux";
-import {
-  selectLanguage,
-  selectLocaleData,
-} from "../../redux/settings/settings.selector";
+} from 'react-native';
+import { Icon } from 'react-native-elements';
+import i18n from 'i18n-js';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import ImageCard from '../../components/imageCard';
+import normalize from '../../utils/normalize';
+import { selectLanguage, selectLocaleData } from '../../redux/settings/settings.selector';
+import Header from '../../components/Header';
 
 const colors = {
-  text: "#777777",
-  text_2: "#242424",
-  text_3: "#e6e1e1",
-  background: "#FFFFFF",
-  primary: "#0093db",
-  primaryDark: "#0093dc",
+  text: '#777777',
+  text_2: '#242424',
+  text_3: '#e6e1e1',
+  background: '#FFFFFF',
+  primary: '#0093db',
+  primaryDark: '#0093dc',
 };
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const appwidth = windowWidth * 0.9;
 
 const Post = ({ localeData, navigation, route }) => {
-  console.log("Post=== ", route.params);
+  console.log('Post=== ', route.params);
   const sectionType = route.params.props;
   const [data, setData] = useState([]);
 
   const checkSection = () => {
     console.log(localeData.baby);
     switch (sectionType) {
-      case "Baby":
+      case 'Baby':
         setData(localeData.baby);
         break;
 
@@ -61,15 +59,15 @@ const Post = ({ localeData, navigation, route }) => {
       <View
         style={{
           width: windowWidth,
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: 'center',
+          justifyContent: 'center',
           marginBottom: 30,
         }}>
         <View style={{ width: appwidth }}>
           <Text
             style={{
               fontSize: normalize(18),
-              fontFamily: "SofiaProSemiBold",
+              fontFamily: 'SofiaProSemiBold',
               color: colors.text_2,
             }}>
             {question}
@@ -78,7 +76,7 @@ const Post = ({ localeData, navigation, route }) => {
             <Text
               style={{
                 fontSize: normalize(15),
-                fontFamily: "SofiaProMedium",
+                fontFamily: 'SofiaProMedium',
                 color: colors.text,
               }}>
               {answer}
@@ -90,7 +88,7 @@ const Post = ({ localeData, navigation, route }) => {
                 key={i}
                 style={{
                   fontSize: normalize(15),
-                  fontFamily: "SofiaProMedium",
+                  fontFamily: 'SofiaProMedium',
                   color: colors.text,
                 }}>
                 ― {opt}
@@ -99,16 +97,16 @@ const Post = ({ localeData, navigation, route }) => {
         </View>
         <View
           style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
           }}>
           {images.map((item, i) => (
             <Image
               key={i}
               source={item}
               style={{
-                width: images.length > 1 ? "42%" : 250,
+                width: images.length > 1 ? '42%' : 250,
                 height: 150,
                 marginVertical: 10,
                 marginHorizontal: 10,
@@ -125,59 +123,12 @@ const Post = ({ localeData, navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          width: windowWidth,
-          justifyContent: "space-between",
-          paddingTop: 5,
-          paddingHorizontal: 20,
-          borderBottomWidth: 1,
-          borderBottomColor: colors.text_3,
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{ marginRight: 20 }}>
-          <Icon
-            name="arrow-left"
-            type="font-awesome"
-            color={colors.primary}
-            size={normalize(20)}
-          />
-        </TouchableOpacity>
-
-        {/* <Image
-          style={{
-            width: normalize(90),
-            height: normalize(90),
-            alignSelf: 'flex-end',
-          }}
-          source={i18n.t('baby')[0].img[0]}
-        /> */}
-        <Text style={styles.headerTitle}>{route.params.props}</Text>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity onPress={() => console.log("hello")}>
-            <Icon
-              name="language"
-              type="font-awesome"
-              color={colors.primary}
-              size={normalize(20)}
-            />
-          </TouchableOpacity>
-          {/* <TouchableOpacity onPress={() => console.log("hello")}>
-            <Icon
-              style
-              // raised
-              name="ios-settings"
-              type="ionicon"
-              color={colors.primary}
-              // color="#f50"
-              onPress={() => console.log("hello")}
-            />
-          </TouchableOpacity> */}
-        </View>
-      </View>
+      <Header
+        windowWidth={windowWidth}
+        navigation={navigation}
+        route={'Post'}
+        title={route.params.props}
+      />
       <FlatList
         // ref={ref}
         // horizontal={true}
@@ -192,7 +143,6 @@ const Post = ({ localeData, navigation, route }) => {
         // initialNumToRender={5}
         // updateCellsBatchingPeriod={5}
         showsHorizontalScrollIndicator={false}
-        style={{}}
         contentContainerStyle={{
           paddingTop: 20,
           paddingBottom: 20,
@@ -210,8 +160,8 @@ const Post = ({ localeData, navigation, route }) => {
           />
         )}
         keyExtractor={(item, index) => index}
-        // showsHorizontalScrollIndicator={false}
-        // extraData={selected}
+      // showsHorizontalScrollIndicator={false}
+      // extraData={selected}
       />
     </View>
   );
@@ -221,31 +171,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     // paddingBottom: 50,
   },
   headerTitle: {
     color: colors.text,
     fontSize: normalize(18),
-    fontFamily: "SofiaProBold",
+    fontFamily: 'SofiaProBold',
     paddingVertical: 10,
-    textAlign: "center",
-    alignSelf: "center",
+    textAlign: 'center',
+    alignSelf: 'center',
   },
   listData: {
     // flex: 1,
-    width: "90%",
-    alignItems: "center",
-    alignSelf: "center",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    width: '90%',
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   cardText: {
     color: colors.text,
-    fontFamily: "SofiaProMedium",
-    textAlign: "center",
+    fontFamily: 'SofiaProMedium',
+    textAlign: 'center',
     paddingTop: 5,
     marginBottom: -10,
   },

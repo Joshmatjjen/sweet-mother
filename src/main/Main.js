@@ -22,6 +22,7 @@ import {
 import { setLanguage, setLocaleData } from "../redux/settings/settings.actions";
 import { createStructuredSelector } from "reselect";
 import enDoc from "../locale/en";
+import igDoc from "../locale/ig";
 import Post from "./post/Post";
 
 const arr = [
@@ -47,7 +48,9 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
       case "en-US":
         setLocaleData(enDoc);
         break;
-
+      case "ig-NG":
+        setLocaleData(igDoc);
+        break;
       default:
         setLocaleData(enDoc);
     }
@@ -58,7 +61,7 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
     langAction();
     StatusBar.setBackgroundColor("#ffffff");
     StatusBar.setBarStyle("dark-content");
-  }, []);
+  }, [language]);
   return (
     <>
       <StatusBar backgroundColor="#ffffff" />
