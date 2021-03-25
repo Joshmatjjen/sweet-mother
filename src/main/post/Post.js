@@ -43,6 +43,9 @@ const Post = ({ localeData, navigation, route }) => {
       case 'Baby':
         setData(localeData.baby);
         break;
+      case 'Sibling':
+        setData(localeData.sibling);
+        break;
 
       default:
         setData(localeData.baby);

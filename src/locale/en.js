@@ -243,6 +243,174 @@ const data = {
       vid: null,
     },
   ],
+  sibling: [
+    {
+      question: "Common Baby Skin Problems: Symptoms & Causes",
+      ans:
+        "Skin problems in a baby can be caused by germs, allergies, heat, and wet nappy. Most skin conditions do not last long.  Common skin conditions in babies include;",
+      ansOpt: [
+        "Heat rash- heat rash is also called prickly heat. Heat rash is caused by sweat that does not evaporate but remains under the skin. It looks likes small, pointed bumps and sometimes red. It often appears on the buttocks and the back. It is common in countries that are hot and humid.  Heat rash is caused by excessive sweat in hot weather, high fever, dressing the baby in cloths that are too warm or thick., wearing clothes that do not allow evaporation to take place and using heavy cream and ointments that blocks sweat pores.",
+        "The nappy rash-Nappy rash is common among babies, and it occurs more at age 9-12 months. The nappy rash looks red around the areas of the skin that are covered by diapers or nappy. Long contact with urine and stools causes it, the rubbing of fabric or sticky tapes, long use of diaper that is wet and infection from germs.",
+        "Cradle cap- are pink or red patches on the scalp. Sometimes it affects the armpit and the neck and it any be covered with white flakes or yellow scales. It is caused by bacterial infection and abnormal production of oil in the oil glands and hair follicles.",
+        "Eczema- are patches of red, itchy, rough and dry skin. It is found often on the check and legs of babies and children, sometimes adults have it. The real cause of Eczema is unknown some factors contribute to it. They are high temperature, viral infection, house dust mites, allergic reaction to detergents, soaps and creams.",
+      ],
+      img: [require("../../assets/images/sibling/Sibling1a.jpg"), require("../../assets/images/sibling/Sibling1b.jpg"), require("../../assets/images/sibling/Sibling1c.jpg"), require("../../assets/images/sibling/Sibling1d.jpg")],
+      vid: null,
+    },
+    {
+      question: "Prevention And Treatment of Baby Skin Conditions",
+      ans:
+        "Dress your child in light clothing depending on the weather, avoid using thick nappy especially in hot weather.  Do not use strong soap especially antiseptic baby soaps for the baby and do not use dyes for the baby clothing. Reduce the time used for bathing to about 5 -10 minutes. Use light cream to rub the skin of the baby.",
+      ansOpt: [
+        "Treatment for heat rash- Avoid thick nappy. Keep the room cool. Dress the baby in light clothes. Avoid thick body creams. Use cool water to bath the baby. Use heat rash treatment creams to clear it.",
+        "Treatment for nappy rash- change baby diaper on time. use water to wash the buttocks after changing nappy and use Vaseline to rub the buttocks. Use prescribed creams for treatment of serious cases.",
+        "Treatment for cradle cap- Put olive oil on the baby's head one hour before you bath the baby. It will help to make the scales soft before bathing. Use medicated shampoo to wash baby's head. Use prescribed treatment cream on the head for serious cases.",
+        "Treatment for eczema- bathe the baby with slightly warm water and mild soap. Do not rub the skin of the baby when drying it, pat it dry. Use body cream daily to prevent and control the spread of eczema. Use prescribed treatment cream.",
+      ],
+      img: [require("../../assets/images/sibling/Sibling2.jpg")],
+      vid: null,
+    },
+    {
+      question: "Causes Of Fever And High Temperature In Children",
+      ans:
+        "The normal range of temperature for children is 36.5°C-38°C. A fever is when the child's body temperature is higher than 38°C. A fever is a sign of sickness not an illness in itself. Fever is a natural response of the body to fight disease. Many things can make children to get fevers, and the fever may last for only a few days.But sometimes a fever may be longer, and it might be the symptom of a serious disease.The most common cause of fever in children is an infection.",
+      ansOpt: null,
+      img: [require("../../assets/images/sibling/Sibling3.jpg")],
+      vid: null,
+    },
+    {
+      question: "Symptoms Of Fever",
+      ans:
+        "Every day the body temperature goes up and down. It is usually lowest early in the morning and highest in the late afternoon and early evening. A fever might come slowly and rise over a few days, or it might rise very quickly.",
+      ansOpt: null,
+      img: [require("../../assets/images/sibling/Sibling4.jpg")],
+      vid: null,
+    },
+    {
+      question: "Causes Of Fever",
+      ans: null,
+      ansOpt: [
+        "Virus- Viruses cause infections such as cold, upper respiratory tract infections and chickenpox.",
+        "Bacteria- Bacteria cause infections as some ear and throat infections, meningitis, urinary tract infections, pneumonia, sore throat, and blood infections.",
+        "Allergic Reactions- It may be due to reaction to drugs, vaccines, pollens, and other air pollutants.",
+      ],
+      img: [require("../../assets/images/sibling/Sibling5a.jpg"), require("../../assets/images/sibling/Sibling5b.jpg")],
+      vid: null,
+    },
+    {
+      question: "When To See Your Doctor About Fever And High Temperature In Children",
+      ans: null,
+      ansOpt: [
+        "If the baby is less than three months old and it has a fever. Visit the doctor immediately because it is difficult to know if a serious illness is causing the fever.",
+        "If the child is between 3–12 months and it has a fever. Go to the doctor immediately you notice the fever because there may be a serious illness causing the fever.",
+        "If the child is older than 12 months go to the doctor if you notice fever and the following signs see:",
+        "Difficulty in breathing",
+        "Drowsiness",
+        "Continuous vomiting or stooling",
+        "A continuous headache, the neck is stiff, and light is hurting the baby's eyes.",
+        "Looking sicker than before – more pale, weak and restless",
+        "Refuses to drink and is not urinating as often as before.",
+        "Has pains",
+        "Does not improve after 48 hours",
+        "If you are worried about any other reason",
+      ],
+      img: [require("../../assets/images/sibling/Sibling6.jpg")],
+      vid: null,
+    },
+    {
+      question: "How to Treat Fever",
+      ans: "It important that you give the baby plenty of fluid to avoid dehydration. If the baby is not taking enough fluid talk to your doctor. Do the following things to help baby overcome the fever",
+      ansOpt: [
+        "Dress the child in light cloths.",
+        "Avoid fans.",
+        "Breastfeed the baby more.",
+        "If the baby is taking baby food, give the normal portion in small bits.",
+        "If the baby is older than 6 months, continue breastfeeding or giving other food. Give the baby water to drink.",
+        "Give baby paracetamol and any other drugs according to the doctor's prescription. Do not give overdose because overdose can cause liver damage.",
+      ],
+      img: [require("../../assets/images/sibling/Sibling7.jpg")],
+      vid: "https://www.youtube.com/watch?v=HsRBsNp_cNw",
+    },
+  ],
+  mother: [
+    {
+      question: "How To Make Your Belly Flat After Child Delivery",
+      ans: null,
+      ansOpt: [
+        "Press your belly with hot water to allow the steam to get to your private part.",
+        "Tie your belly with a cloth after pressing it with hot water or sitting on a hot water.",
+        "Drink hot pepper soup",
+        "Take warm water and avoid taking cold or ordinary water.",
+        "you could sit on hot water if you did Cesarean Section (CS).",
+        "Keep doing all the things said above for more than 3 months after delivery.",
+      ],
+      note: "NB: Don't stop when the stomach is at the size you want. Because if you stop there, the tummy will become bigger later. So, press beyond where you want to stop it. The reason is that the belly will still increase in size after you stop. So, it will come back to the point that you want it to be.",
+      img: [require("../../assets/images/mother/Mother1.jpg")],
+      vid: null,
+    },
+    {
+      question: "Care Of The Breast During Pregnancy",
+      ans: "Special care of your breasts is very important throughout your pregnancy. Here are some breast care tips during pregnancy: Hygiene Practices For The Breast There are some hygienic practices you do during your pregnancy:",
+      ansOpt: [
+        "Wash your nipples. The body fluid passes through the breast from the fifth month of pregnancy. It looks like a hard layer, and the surrounding skin looks red. You can avoid this by making your nipples clean. To make the nipples clean, rub them with a clean piece of cloth.",
+        "Do not to use soap to clean nipples because it can cause dryness and make the nipple crack. Sesame oil or petroleum jelly is good to keep the nipples soft.",
+        "To make your nipple large for easy breastfeeding always pull your nipples with the forefinger and thumb when you are bathing. Take care not to scratch the nipples with your nails. This exercise will help milk flow after delivery.",
+        "Massage your breasts by rubbing them in circles when bathing with oil and water. Breast massage helps proper blood flow.",
+        "Always wear a bra to support the weight of your breasts. Make sure that you do not put much pressure on the breast by wearing a very tight bra. Do not use a bra that has underwires in it because they disturb the production of milk.",
+        "Use maternity bra for breastfeeding. Maternity bras will make breastfeeding easier and it gives support to the breast.",
+      ],
+      img: [require("../../assets/images/mother/Mother2.jpg")],
+      vid: null,
+    },
+    {
+      question: "How Does Pregnancy Occur?",
+      ans: "Every woman has eggs in her in two places in her body above the womb. One egg is released every month so that if a man's sperm meets it, the egg and the sperm can become a baby.  When a woman menstruates, it takes about 28 days before the next menstruation. The first day of the menses is the first day of the menstrual cycle. On the 14th day after the first of day menstruation, an egg comes out to the womb. The egg remains alive for 2 days in the womb waiting for sperm to join with it and make it fertilized so that it can grow into a baby. When the egg is fertilized, it attaches itself to the wall of the womb, and it starts to grow into a baby.The baby grows in the womb for about 9 months, and it is delivered.",
+      ansOpt: null,
+      img: [require("../../assets/images/mother/Mother3.jpg")],
+      vid: ["https://www.youtube.com/watch?v=vFfqLs94iHc", "https://www.youtube.com/watch?v=DGyRD9HnXVs"],
+    },
+    {
+      question: "Why Does A Pregnant Woman Vomit?",
+      ans: "The main cause of vomiting during pregnancy is not known. But is likely to be due to changes in the body hormones.",
+      ansOpt: null,
+      img: [require("../../assets/images/mother/Mother4.jpg")],
+      vid: null,
+    },
+    {
+      question: "What Are The Foods To Avoid While Pregnant?",
+      ans: "The main cause of vomiting during pregnancy is not known. But is likely to be due to changes in the body hormones.",
+      ansOpt: [
+        "Do not eat uncooked meat and fish or they are not well cooked- Uncooked meat and fish that are not well cooked contains germs that are dangerous to a pregnant woman and her baby.",
+        "Do not eat uncooked eggs- Uncooked eggs may contain germs which are harmful to a pregnant woman. Do not eat any food made with uncooked eggs. Eggs must be properly cooked before you eat it.",
+        "Do not eat un-boiled raw milk- Don't drink un-boiled raw milk, or cheeses made from un-boiled raw milk. It means that do not drink milk that is collected fresh from an animal. You must boil the milk before you drink it.",
+        "Wash all fruits and vegetables- Wash fruits and vegetables very well and remove all the soil from it before you eat or cook them.",
+        "Do not drink alcohol- Alcohol may damage the baby and affect the baby's growth in the womb. Alcohol can affect your baby's development.",
+        "Reduce caffeine- When caffeine is taken a lot during pregnancy, it reduces the weight of the baby at birth. Too much caffeine can also cause miscarriage. Some soft drink contains caffeine. An example is Cola drinks. So, reduce the bottles of Cola drink that you take during pregnancy.",
+      ],
+      img: [require("../../assets/images/mother/Mother5.jpg")],
+      vid: null,
+    },
+    {
+      question: "Can a pregnant woman still have a regular period?",
+      ans: "Yes, you can still get regular blood flow when you are pregnant. Some women have vaginal bleeding during pregnancy. Some even have regular bleeding that looks like a regular period. But vaginal bleeding during pregnancy is not the same thing as menses. Monthly bleeding while pregnant may be because of change in the cervix which makes it softer, multiple pregnancies such as twins and infection.",
+      ansOpt: null,
+      img: [require("../../assets/images/mother/Mother6.jpg")],
+      vid: null,
+    },
+    {
+      question: "Causes of Malaria In Pregnancy",
+      ans: "Malaria is common in areas where there is a high amount of rainfall and temperature such as Africa. The environment is good for the mosquito to grow.  The following factors can cause malaria during pregnancy;",
+      ansOpt: [
+        "Loss of immunity: Pregnancy makes a woman's resistance to disease to reduce. This makes the pregnant woman likely to contract malaria.",
+        "Areas where there is Malaria: Women in an area where malaria is common often have immunity against malaria. So, they are not likely to get malaria. But in areas where malaria is not common, women have lower resistance to malaria, so they have a high tendency to get malaria infection.",
+        "HIV infection: Women infected with HIV have a high risk of contracting malaria because there is immunity low.",
+      ],
+      img: [require("../../assets/images/mother/Mother7.jpg")],
+      vid: ["https://www.youtube.com/watch?v=UcIyJbEM_ko"],
+    },
+  ]
+
+
 };
 
 export default data;
