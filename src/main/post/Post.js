@@ -76,7 +76,11 @@ const Post = ({ localeData, navigation, route, language }) => {
         onPress={handlePress}
         id={id}
         style={{ width: windowWidth }}
-        titleStyle={{ color: colors.text, fontFamily: "SofiaProMedium" }}>
+        titleStyle={{
+          color: colors.text,
+          fontFamily: "SofiaProMedium",
+          fontSize: normalize(15),
+        }}>
         <View
           style={{
             width: windowWidth,
@@ -87,7 +91,7 @@ const Post = ({ localeData, navigation, route, language }) => {
           <View style={{ width: appwidth }}>
             <Text
               style={{
-                fontSize: normalize(18),
+                fontSize: normalize(17),
                 fontFamily: "SofiaProMedium",
                 color: colors.text,
               }}>
@@ -191,7 +195,7 @@ const Post = ({ localeData, navigation, route, language }) => {
         // updateCellsBatchingPeriod={5}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
-          paddingTop: 20,
+          paddingTop: 10,
           paddingBottom: 20,
         }}
         data={localeData.baby}
