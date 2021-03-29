@@ -58,6 +58,7 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
 
   useEffect(() => {
     // setLanguage();
+    console.log("Changing");
     langAction();
     StatusBar.setBackgroundColor("#ffffff");
     StatusBar.setBarStyle("dark-content");

@@ -43,6 +43,8 @@
         "wasm",
         "svg"
       ]
-    }
+    },
+    "description": "An App Built with React-Native to Give Individuals Couples, Mothers and Pregnant women a lot of ideas about your health",
+    "githubUrl": "https://github.com/Joshmatjjen/sweet-mother"
   }
 }

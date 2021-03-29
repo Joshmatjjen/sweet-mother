@@ -7,12 +7,12 @@ import healthImg from "../../assets/images/home/health.jpeg";
 
 const data = {
   home: [
-    { name: "Umuaka Amuru Ohuru", img: babyImg },
-    { name: "Umuaka", img: siblingImg },
-    { name: "Maka Nne", img: motherImg },
-    { name: "Di na nwunye", img: spouseImg },
-    { name: "Mmekọahụ", img: sexImg },
-    { name: "Ahụ Ike", img: healthImg },
+    { id: 1, name: "Umuaka Amuru Ohuru", img: babyImg },
+    { id: 2, name: "Umuaka", img: siblingImg },
+    { id: 3, name: "Maka Nne", img: motherImg },
+    { id: 4, name: "Di na nwunye", img: spouseImg },
+    { id: 5, name: "Mmekọahụ", img: sexImg },
+    { id: 6, name: "Ahụ Ike", img: healthImg },
   ],
   baby: [
     {
@@ -84,7 +84,8 @@ const data = {
       vid: null,
     },
     {
-      question: "Ekwesirim inye nwatakiri mmiri onunu mgbe o di nani onwa abuo?",
+      question:
+        "Ekwesirim inye nwatakiri mmiri onunu mgbe o di nani onwa abuo?",
       ans:
         "Mbanu, ekwesiri inye nwatakiri mmiri mgbe odi onwa isii (6months). Nka bu ihe anyi na-akpo iji nani mmiri ara nne azu nwa ohuru. Mmiri ara nne nwere mmiri onunu zuru ezu maka nwatakiri. Nye nwa ohuru ara obunadi mgbe ututuru n’akpo ya. Mmiri ara ga-echebe nwata puo n’oria di iche iche. Mgbe nwata di onwa isii, I nwere ike nyezie ya mmiri onunu, anu akwa, dgz.",
       ansOpt: null,
@@ -192,7 +193,7 @@ const data = {
         "Mee ka nwa gi hie ura nke oma n’abali.",
         "O buru n’nwa ehighi ura, mado ya n’afo gi ka o wee kute ume nke oma.",
         "Biko nye nwa gi nani mmiri ara zuru ezu rue mgbe o ruru onwa isii.",
-        "Mgbe onwa isii gasiri I puru inye ya nkpuru osisi ozo nwere vitamin C."
+        "Mgbe onwa isii gasiri I puru inye ya nkpuru osisi ozo nwere vitamin C.",
       ],
       img: [require("../../assets/images/baby/Baby17.jpg")],
       vid: null,
@@ -223,8 +224,7 @@ const data = {
     },
     {
       question: "Uru mmiri ara baara umuaka",
-      ans:
-        "Mmiri ara baara umuaka otutu uru. Ha gunyere ndi a:-",
+      ans: "Mmiri ara baara umuaka otutu uru. Ha gunyere ndi a:-",
       ansOpt: [
         "Mmiri ara n’eme ka umuaka too nke oma ma gbasie ike.",
         "Mmiri ara bu nri kasi edozi umuaka ahu.",

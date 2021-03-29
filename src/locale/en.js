@@ -7,12 +7,12 @@ import healthImg from "../../assets/images/home/health.jpeg";
 
 const data = {
   home: [
-    { name: "Baby", img: babyImg },
-    { name: "Sibling", img: siblingImg },
-    { name: "Mother", img: motherImg },
-    { name: "Spouse", img: spouseImg },
-    { name: "Sex", img: sexImg },
-    { name: "Health", img: healthImg },
+    { id: 1, name: "Baby", img: babyImg },
+    { id: 2, name: "Sibling", img: siblingImg },
+    { id: 3, name: "Mother", img: motherImg },
+    { id: 4, name: "Spouse", img: spouseImg },
+    { id: 5, name: "Sex", img: sexImg },
+    { id: 6, name: "Health", img: healthImg },
   ],
   baby: [
     {
@@ -1820,5 +1820,7 @@ const data = {
     },
   ],
 };
+
+// https://expo.io/@/projects/sweet-mother
 
 export default data;

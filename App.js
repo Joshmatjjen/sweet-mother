@@ -29,6 +29,8 @@ const customFonts = {
   SofiaProLight: require("./assets/fonts/SofiaProLight.ttf"),
   SofiaProSemiBold: require("./assets/fonts/SofiaProSemiBold.ttf"),
   SofiaProBold: require("./assets/fonts/SofiaProBold.ttf"),
+  SofiaProMediumItalic: require("./assets/fonts/SofiaProMedium-Italic.ttf"),
+  SofiaProBlack: require("./assets/fonts/SofiaProBlack.ttf"),
 };
 
 // Set the key-value pairs for the different languages you want to support.

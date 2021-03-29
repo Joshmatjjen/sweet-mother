@@ -1,5 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';c
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -21,6 +21,7 @@ import {
   selectLocaleData,
 } from "../../redux/settings/settings.selector";
 import Header from "../../components/Header";
+import { List } from "react-native-paper";
 
 const colors = {
   text: "#777777",
@@ -35,107 +36,121 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
-const Post = ({ localeData, navigation, route }) => {
-  console.log("Post=== ", route.params);
+const Post = ({ localeData, navigation, route, language }) => {
+  // console.log("Post=== ", localeData[0]);
   const sectionType = route.params.props;
   const [data, setData] = useState([]);
 
   const checkSection = () => {
+    console.log("____ Changing");
     console.log(localeData.baby);
-    switch (sectionType) {
-      case "Baby":
-        setData(localeData.baby);
-        break;
-      case "Sibling":
-        setData(localeData.sibling);
-        break;
-      case "Mother":
-        setData(localeData.mother);
-        break;
-      case "Spouse":
-        setData(localeData.spouse);
-        break;
-      case "Sex":
-        setData(localeData.sex);
-        break;
-      case "Health":
-        setData(localeData.health);
-        break;
-      default:
-        setData(localeData.baby);
-    }
+    sectionType.id === 1 && setData(localeData.baby);
+    sectionType.id === 2 && setData(localeData.sibling);
+    sectionType.id === 3 && setData(localeData.mother);
+    sectionType.id === 4 && setData(localeData.spouse);
+    sectionType.id === 5 && setData(localeData.sex);
+    sectionType.id === 6 && setData(localeData.health);
   };
 
-  useEffect(() => {
+  useMemo(() => {
     // setData([localeData.baby]);
-    checkSection();
-  }, []);
+    if (!language) checkSection();
+  }, [language, data]);
 
-  const Section = ({ question, answer, answerOpt, images, videos }) => {
+  const Section = ({
+    question,
+    answer,
+    answerOpt,
+    note,
+    images,
+    videos,
+    id,
+  }) => {
+    const [expanded, setExpanded] = useState(false);
+
+    const handlePress = () => setExpanded(!expanded);
     return (
-      <View
-        style={{
-          width: windowWidth,
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 30,
-        }}>
-        <View style={{ width: appwidth }}>
-          <Text
-            style={{
-              fontSize: normalize(18),
-              fontFamily: "SofiaProSemiBold",
-              color: colors.text_2,
-            }}>
-            {question}
-          </Text>
-          {answer && (
+      <List.Accordion
+        title={question}
+        expanded={expanded}
+        onPress={handlePress}
+        id={id}
+        style={{ width: windowWidth }}
+        titleStyle={{ color: colors.text, fontFamily: "SofiaProMedium" }}>
+        <View
+          style={{
+            width: windowWidth,
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 30,
+          }}>
+          <View style={{ width: appwidth }}>
             <Text
               style={{
-                fontSize: normalize(15),
+                fontSize: normalize(18),
                 fontFamily: "SofiaProMedium",
                 color: colors.text,
               }}>
-              {answer}
+              {question}
             </Text>
-          )}
-          {answerOpt &&
-            answerOpt.map((opt, i) => (
+            {answer && (
               <Text
-                key={i}
                 style={{
                   fontSize: normalize(15),
-                  fontFamily: "SofiaProMedium",
+                  fontFamily: "SofiaProLight",
                   color: colors.text,
                 }}>
-                ― {opt}
+                {answer}
               </Text>
-            ))}
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}>
-          {images &&
-            images.map((item, i) => (
-              <Image
-                key={i}
-                source={item}
+            )}
+            {answerOpt &&
+              answerOpt.map((opt, i) => (
+                <Text
+                  key={i}
+                  style={{
+                    fontSize: normalize(15),
+                    fontFamily: "SofiaProMedium",
+                    color: colors.text,
+                  }}>
+                  ― {opt}
+                </Text>
+              ))}
+            {note && (
+              <Text
                 style={{
-                  width: images.length > 1 ? "42%" : 250,
-                  height: 150,
-                  marginVertical: 10,
-                  marginHorizontal: 10,
-                  borderRadius: 10,
-                  borderWidth: 2,
-                  borderColor: colors.text_3,
-                }}
-              />
-            ))}
+                  fontSize: normalize(15),
+                  fontFamily: "SofiaProMediumItalic",
+                  color: colors.text,
+                }}>
+                {note}
+              </Text>
+            )}
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}>
+            {images &&
+              images.map((item, i) => (
+                <Image
+                  key={i}
+                  source={item}
+                  style={{
+                    width: images.length > 1 ? "42%" : 250,
+                    height: 150,
+                    marginVertical: 10,
+                    marginHorizontal: 10,
+                    borderRadius: 10,
+                    borderWidth: 2,
+                    borderColor: colors.text_3,
+                  }}
+                />
+              ))}
+          </View>
         </View>
-      </View>
+      </List.Accordion>
     );
   };
 
@@ -145,8 +160,22 @@ const Post = ({ localeData, navigation, route }) => {
         windowWidth={windowWidth}
         navigation={navigation}
         route={"Post"}
-        title={route.params.props}
+        title={localeData.home[sectionType.id - 1].name}
       />
+      {/* <List.AccordionGroup>
+        <List.Accordion title="Accordion 1" id="1">
+          <List.Item title="Item 1" />
+        </List.Accordion>
+        <List.Accordion title="Accordion 2" id="2">
+          <List.Item title="Item 2" />
+        </List.Accordion>
+        <View>
+          <Text>cfdgdg dgfdgdfghfd</Text>
+          <List.Accordion title="Accordion 3" id="3">
+            <List.Item title="Item 3" />
+          </List.Accordion>
+        </View>
+      </List.AccordionGroup> */}
       <FlatList
         // ref={ref}
         // horizontal={true}
@@ -165,7 +194,7 @@ const Post = ({ localeData, navigation, route }) => {
           paddingTop: 20,
           paddingBottom: 20,
         }}
-        data={data}
+        data={localeData.baby}
         numColumns={1}
         renderItem={({ item, index }) => (
           <Section
@@ -173,6 +202,7 @@ const Post = ({ localeData, navigation, route }) => {
             question={item.question}
             answer={item.ans}
             answerOpt={item.ansOpt}
+            note={item.note}
             images={item.img}
             videos={item.vid}
           />
