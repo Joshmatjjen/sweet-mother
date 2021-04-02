@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 const selectPractices = (state) => state.practice;
 
@@ -68,50 +68,13 @@ export const selectAllPractices = createSelector(
     }
   },
 );
-export const selectFilter = createSelector(
+
+export const selectGetAllPosts = createSelector(
   [selectPractices],
-  (practices) => practices.filter,
-);
-export const selectIsLoading = createSelector(
-  [selectPractices],
-  (practices) => practices.isLoading,
+  (practices) => practices.posts,
 );
 
-export const selectIsFetching = createSelector(
-  [selectPractices],
-  (practices) => practices.isFetching,
-);
-
-export const selectJoinedPractices = createSelector(
-  [selectPractices],
-  (practices) => practices.joinedPractices,
-);
-
-export const selectCurrentPracticeId = createSelector(
-  [selectPractices],
-  (practices) => practices.currentPracticeId,
-);
-
-export const selectPracticeDms = createSelector(
-  [selectPractices],
-  (practices) => {
-    if (practices.practiceDms) {
-      const data = practices.practiceDms.filter(
-        (item) => item.practiceId !== null,
-      );
-      return data;
-    } else {
-      return practices.practiceDms;
-    }
-  },
-);
-
-export const selectPracticeSubgroups = createSelector(
-  [selectPractices],
-  (practices) => practices.practiceSubgroups,
-);
-
-export const selectAllMessages = createSelector(
+export const selectGetAllPosts = createSelector(
   [selectPractices],
   (practices) => practices.allMessages,
 );
