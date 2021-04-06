@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   FlatList,
   useWindowDimensions,
+  ActivityIndicator,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import i18n from "i18n-js";
@@ -24,6 +25,15 @@ import {
 import Header from "../../components/Header";
 import { List } from "react-native-paper";
 import HTML from "react-native-render-html";
+import {
+  getAllPostsStart,
+  clearPostsData,
+} from "../../redux/posts/posts.actions";
+import {
+  selectGetAllPosts,
+  selectIsFetching,
+} from "../../redux/posts/posts.selector";
+import { useIsFocused } from "@react-navigation/native";
 
 const colors = {
   text: "#777777",
@@ -34,34 +44,51 @@ const colors = {
   primaryDark: "#0093dc",
 };
 const htmlContent = `
-<ul>\n<li data-leveltext=\"%1.\" data-font=\"Calibri, Calibri_MSFontService, sans-serif\" data-listid=\"3\" aria-setsize=\"-1\" data-aria-posinset=\"1\" data-aria-level=\"1\"><span data-contrast=\"auto\">Use the medicine<\/span><span data-ccp-props=\"{&quot;134233279&quot;:true,&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}\"> <\/span><\/li>\n<li data-leveltext=\"%1.\" data-font=\"Calibri, Calibri_MSFontService, sans-serif\" data-listid=\"3\" aria-setsize=\"-1\" data-aria-posinset=\"2\" data-aria-level=\"1\"><span data-contrast=\"auto\">Take the baby to the clinic and use the drug that you are given. Use the drug the way that you are told. Make sure that you complete the dose. <\/span><span data-ccp-props=\"{&quot;134233279&quot;:true,&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}\"> <\/span><\/li>\n<li data-leveltext=\"%1.\" data-font=\"Calibri, Calibri_MSFontService, sans-serif\" data-listid=\"3\" aria-setsize=\"-1\" data-aria-posinset=\"3\" data-aria-level=\"1\"><span data-contrast=\"auto\">Give the baby a <\/span><span data-contrast=\"auto\">luke<\/span><span data-contrast=\"auto\">-warm bath. The water from the bathing will evaporate from the baby&#8217;s skin and cool her down. Do not use cold water, because it will make the baby shiver and her temperature will rise. <\/span><span data-ccp-props=\"{&quot;134233279&quot;:true,&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}\"> <\/span><\/li>\n<li data-leveltext=\"%1.\" data-font=\"Calibri, Calibri_MSFontService, sans-serif\" data-listid=\"3\" aria-setsize=\"-1\" data-aria-posinset=\"4\" data-aria-level=\"1\"><span data-contrast=\"auto\">Give extra fluids for <\/span><span data-contrast=\"auto\">the <\/span><span data-contrast=\"auto\">baby to drink. When you give the baby extra fluid, you are cooling it down from the inside.<\/span><\/li>\n<\/ul>\n
+<ul>\n<li><span data-contrast=\"auto\">Nye <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">og<\/span><span data-contrast=\"auto\">wu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">dok<\/span><span data-contrast=\"auto\">ita<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">si<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">gi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nye<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">y<\/span><span data-contrast=\"auto\">a<\/span><span data-contrast=\"auto\">.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559739&quot;:0,&quot;335559740&quot;:240}\"> <\/span><\/li>\n<li><span data-contrast=\"auto\">Kporo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ga<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ulogwu<\/span><span data-contrast=\"auto\">, ma <\/span><span data-contrast=\"auto\">nye<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ogwu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">dika<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">dokita<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">si<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">tuzie<\/span><span data-contrast=\"auto\"> aka.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559739&quot;:0,&quot;335559740&quot;:240}\"> <\/span><\/li>\n<li><span data-contrast=\"auto\">Nye <\/span><span data-contrast=\"auto\">mmiri<\/span><span data-contrast=\"auto\"> d<\/span><span data-contrast=\"auto\">i <\/span><span data-contrast=\"auto\">nari-nari<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">esiri<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">n’oku<\/span><span data-contrast=\"auto\">. Jiri <\/span><span data-contrast=\"auto\">mm<\/span><span data-contrast=\"auto\">ri<\/span><span data-contrast=\"auto\"> di ‘<\/span><span data-contrast=\"auto\">nari<\/span><span data-contrast=\"auto\">-‘<\/span><span data-contrast=\"auto\">n<\/span><span data-contrast=\"auto\">ari<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">esiri<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">n’oku<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">saa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ahu.Nke<\/span><span data-contrast=\"auto\"> a <\/span><span data-contrast=\"auto\">ga-eme<\/span><span data-contrast=\"auto\"> ka ahu <\/span><span data-contrast=\"auto\">juo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ngwa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ngwa<\/span><span data-contrast=\"auto\">.<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">Biko <\/span><span data-contrast=\"auto\">eji<\/span><span data-contrast=\"auto\">la<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">mmiri<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">saa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nwa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ohuru<\/span><span data-contrast=\"auto\"> ahu ma <\/span><span data-contrast=\"auto\">obu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nye<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> ka <\/span><span data-contrast=\"auto\">onuo<\/span><span data-contrast=\"auto\">,<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nkea<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">puru<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ime<\/span><span data-contrast=\"auto\"> ka <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">tuo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\">.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559685&quot;:1440,&quot;335559739&quot;:0,&quot;335559740&quot;:240,&quot;335559991&quot;:720}\"> <\/span><\/li>\n<li><span data-contrast=\"auto\">Nye <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ihe<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">onunu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ndi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ozo<\/span><span data-contrast=\"auto\">,<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ij<\/span><span data-contrast=\"auto\">i<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">mee<\/span><span data-contrast=\"auto\"> ka ahu <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">juo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> site <\/span><span data-contrast=\"auto\">n’ime<\/span><span data-contrast=\"auto\">.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559685&quot;:1440,&quot;335559739&quot;:0,&quot;335559740&quot;:240,&quot;335559991&quot;:720}\"> <\/span><\/li>\n<\/ul>\n
 `;
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
-const Post = ({ localeData, navigation, route, language }) => {
+const Post = ({
+  localeData,
+  navigation,
+  route,
+  language,
+  getAllPostsStart,
+  isFetching,
+  posts,
+  clearPostsData,
+}) => {
   // console.log("Post=== ", localeData[0]);
-  const sectionType = route.params.props;
-  const [data, setData] = useState([]);
+  const postData = route.params.props;
+  const sectionId = route.params.sectionId;
+  const sectionName = route.params.sectionName;
+  const isPostFocused = useIsFocused();
+  // const [data, setData] = useState([]);
   const contentWidth = useWindowDimensions().width;
 
-  const checkSection = () => {
-    console.log("____ Changing");
-    console.log(localeData.baby);
-    sectionType.id === 1 && setData(localeData.baby);
-    sectionType.id === 2 && setData(localeData.sibling);
-    sectionType.id === 3 && setData(localeData.mother);
-    sectionType.id === 4 && setData(localeData.spouse);
-    sectionType.id === 5 && setData(localeData.sex);
-    sectionType.id === 6 && setData(localeData.health);
-  };
+  // const checkSection = () => {
+  //   console.log("____ Changing", language);
+  //   // console.log(localeData.baby);
+  //   // sectionType.id === 1 && setData(localeData.baby);
+  //   // sectionType.id === 2 && setData(localeData.sibling);
+  //   // sectionType.id === 3 && setData(localeData.mother);
+  //   // sectionType.id === 4 && setData(localeData.spouse);
+  //   // sectionType.id === 5 && setData(localeData.sex);
+  //   // sectionType.id === 6 && setData(localeData.health);
+  // };
 
-  useMemo(() => {
-    // setData([localeData.baby]);
-    if (!language) checkSection();
-  }, [language, data]);
+  // useMemo(() => {
+  //   // setData([localeData.baby]);
+  //   console.log("____ Changing", language);
+  //   if (!language) checkSection();
+  // }, [language, data]);
+  useEffect(() => {
+    isPostFocused && getAllPostsStart();
+    // if (isPostFocused) clearPostsData();
+  }, [isPostFocused]);
 
   const Section = ({
     question,
@@ -73,6 +100,8 @@ const Post = ({ localeData, navigation, route, language }) => {
     id,
   }) => {
     const [expanded, setExpanded] = useState(false);
+    console.log("Lang___", language);
+    console.log("Data___", question);
 
     const handlePress = () => setExpanded(!expanded);
     return (
@@ -95,7 +124,7 @@ const Post = ({ localeData, navigation, route, language }) => {
             marginBottom: 30,
           }}>
           <View style={{ width: appwidth }}>
-            <HTML
+            {/* <HTML
               source={{ html: htmlContent }}
               contentWidth={contentWidth}
               baseFontStyle={{
@@ -126,7 +155,7 @@ const Post = ({ localeData, navigation, route, language }) => {
                   fontFamily: "SofiaProLight",
                 },
               }}
-            />
+            /> */}
             <Text
               style={{
                 fontSize: normalize(17),
@@ -136,37 +165,47 @@ const Post = ({ localeData, navigation, route, language }) => {
               {question}
             </Text>
             {answer && (
-              <Text
+              <HTML
+                source={{ html: answer }}
+                contentWidth={contentWidth}
+                baseFontStyle={{
+                  fontSize: normalize(13),
+                  fontFamily: "SofiaProLight",
+                  color: colors.text,
+                }}
+                ignoredStyles={["font-family", "font-style", "letter-spacing"]}
+                tagsStyles={{
+                  i: {
+                    fontFamily: "SofiaProLight",
+                    // fontSize: normalize(26),
+                  },
+                  p: {
+                    fontFamily: "SofiaProLight",
+                  },
+                  pre: {
+                    fontFamily: "SofiaProLight",
+                  },
+                  span: {
+                    fontFamily: "SofiaProLight",
+                  },
+                }}
+                classesStyles={{
+                  "last-paragraph": {
+                    textAlign: "right",
+                    color: "teal",
+                    fontFamily: "SofiaProLight",
+                  },
+                }}
+              />
+            )}
+            {/* <Text
                 style={{
                   fontSize: normalize(15),
                   fontFamily: "SofiaProLight",
                   color: colors.text,
                 }}>
                 {answer}
-              </Text>
-            )}
-            {answerOpt &&
-              answerOpt.map((opt, i) => (
-                <Text
-                  key={i}
-                  style={{
-                    fontSize: normalize(15),
-                    fontFamily: "SofiaProMedium",
-                    color: colors.text,
-                  }}>
-                  ― {opt}
-                </Text>
-              ))}
-            {note && (
-              <Text
-                style={{
-                  fontSize: normalize(15),
-                  fontFamily: "SofiaProMediumItalic",
-                  color: colors.text,
-                }}>
-                {note}
-              </Text>
-            )}
+              </Text> */}
           </View>
           <View
             style={{
@@ -178,7 +217,9 @@ const Post = ({ localeData, navigation, route, language }) => {
               images.map((item, i) => (
                 <Image
                   key={i}
-                  source={item}
+                  source={{
+                    uri: item,
+                  }}
                   style={{
                     width: images.length > 1 ? "42%" : 250,
                     height: 150,
@@ -202,7 +243,9 @@ const Post = ({ localeData, navigation, route, language }) => {
         windowWidth={windowWidth}
         navigation={navigation}
         route={"Post"}
-        title={localeData.home[sectionType.id - 1].name}
+        title={localeData.home[sectionId - 1].name}
+        isLoading={isFetching}
+        refresh={getAllPostsStart}
       />
       {/* <List.AccordionGroup>
         <List.Accordion title="Accordion 1" id="1">
@@ -228,7 +271,54 @@ const Post = ({ localeData, navigation, route, language }) => {
         //   />
         // }
         // removeClippedSubviews
-        // ListEmptyComponent
+        ListEmptyComponent={
+          !isFetching ? (
+            <View style={{ marginTop: windowHeight / 4 }}>
+              <Icon
+                style
+                size={normalize(45)}
+                name="wifi-off"
+                type="material-icons"
+                color={colors.text}
+              />
+              <Text
+                style={{
+                  fontSize: normalize(17),
+                  fontFamily: "SofiaProMedium",
+                  color: colors.text,
+                }}>
+                No internet connection
+              </Text>
+              <TouchableOpacity
+                onPress={() => getAllPostsStart()}
+                style={{
+                  backgroundColor: colors.primary,
+                  width: 80,
+                  alignSelf: "center",
+                  marginTop: 10,
+                  borderRadius: 10,
+                }}>
+                <Text
+                  style={{
+                    fontSize: normalize(15),
+                    fontFamily: "SofiaProMedium",
+                    color: "white",
+                    textAlign: "center",
+                    paddingHorizontal: 10,
+                    paddingVertical: 3,
+                  }}>
+                  Refresh
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <ActivityIndicator
+              style={{ marginTop: windowHeight / 3.2 }}
+              size={normalize(40)}
+              color={colors.primary}
+            />
+          )
+        }
         // initialNumToRender={5}
         // updateCellsBatchingPeriod={5}
         showsHorizontalScrollIndicator={false}
@@ -236,17 +326,27 @@ const Post = ({ localeData, navigation, route, language }) => {
           paddingTop: 10,
           paddingBottom: 20,
         }}
-        data={localeData.baby}
+        data={posts.filter((item) => item.acf.category === sectionName)}
         numColumns={1}
         renderItem={({ item, index }) => (
           <Section
             id={index}
-            question={item.question}
-            answer={item.ans}
-            answerOpt={item.ansOpt}
-            note={item.note}
-            images={item.img}
-            videos={item.vid}
+            question={
+              (language === "en-US" && item.acf.englishTitle) ||
+              (language === "ig-NG" && item.acf.igboTitle) ||
+              (language === "yo-NG" && item.acf.yorubaTitle) ||
+              (language === "ha-NG" && item.acf.hausaTitle) ||
+              (language === "pum-NG" && item.acf.pidginTitle)
+            }
+            answer={
+              (language === "en-US" && item.acf.englishContent) ||
+              (language === "ig-NG" && item.acf.igboContent) ||
+              (language === "yo-NG" && item.acf.yorubaContent) ||
+              (language === "ha-NG" && item.acf.hausaContent) ||
+              (language === "pum-NG" && item.acf.pidginContent)
+            }
+            images={item.acf.images}
+            videos={item.acf.videos}
           />
         )}
         keyExtractor={(item, index) => index}
@@ -262,7 +362,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     // paddingBottom: 50,
   },
   headerTitle: {
@@ -294,6 +394,13 @@ const styles = StyleSheet.create({
 const mapStateToProps = createStructuredSelector({
   language: selectLanguage,
   localeData: selectLocaleData,
+  isFetching: selectIsFetching,
+  posts: selectGetAllPosts,
 });
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch) => ({
+  getAllPostsStart: () => dispatch(getAllPostsStart()),
+  clearPostsData: () => dispatch(clearPostsData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

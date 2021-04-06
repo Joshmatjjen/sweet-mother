@@ -1,4 +1,4 @@
-const SettingsActionTypes = {
+const PostsActionTypes = {
   CLEAR_POSTS_DATA: "CLEAR_POSTS_DATA",
 
   GET_ALL_POSTS_START: "GET_ALL_POSTS_START",
@@ -6,4 +6,4 @@ const SettingsActionTypes = {
   GET_ALL_POSTS_FAILURE: "GET_ALL_POSTS_FAILURE",
 };
 
-export default SettingsActionTypes;
+export default PostsActionTypes;

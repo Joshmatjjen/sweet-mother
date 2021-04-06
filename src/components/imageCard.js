@@ -1,16 +1,23 @@
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 // import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Card } from 'react-native-elements';
+import { Card } from "react-native-elements";
 
-const ImageCard = ({ section, navigation, children }) => {
+const ImageCard = ({ posts, section, navigation, children }) => {
+  console.log("Section__", section);
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('Post', { props: section })}>
+      onPress={() =>
+        navigation.navigate("Post", {
+          props: posts.filter((item) => item.acf.category === section.name),
+          sectionName: section.name,
+          sectionId: section.id,
+        })
+      }>
       <Card
         containerStyle={{
-          width: '89%',
+          width: "89%",
           shadowOffset: {
             width: 0,
             height: 2,
@@ -19,9 +26,9 @@ const ImageCard = ({ section, navigation, children }) => {
           shadowRadius: 2,
           elevation: 5,
         }}
-      // style={{ backgroundColor: colors.background_1 }}
+        // style={{ backgroundColor: colors.background_1 }}
       >
-        <View style={{ backgroundColor: 'white' }}>{children}</View>
+        <View style={{ backgroundColor: "white" }}>{children}</View>
       </Card>
     </TouchableOpacity>
   );
@@ -29,7 +36,7 @@ const ImageCard = ({ section, navigation, children }) => {
 
 const styles = StyleSheet.create({
   card: {
-    flexBasis: '40%',
+    flexBasis: "40%",
     marginVertical: 10,
     // shadowColor: '#000',
     // shadowOffset: { width: 0, height: 1 },

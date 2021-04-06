@@ -1,5 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';c
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import i18n from "i18n-js";
+import { useIsFocused } from "@react-navigation/native";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import ImageCard from "../../components/imageCard";
@@ -21,6 +22,11 @@ import {
 } from "../../redux/settings/settings.selector";
 import Header from "../../components/Header";
 import { setLanguage } from "../../redux/settings/settings.actions";
+import { getAllPostsStart } from "../../redux/posts/posts.actions";
+import {
+  selectGetAllPosts,
+  selectIsFetching,
+} from "../../redux/posts/posts.selector";
 
 const colors = {
   text: "#777777",
@@ -33,13 +39,33 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
-const Home = ({ localeData, navigation, setLanguage }) => {
-  console.log("Home=== ", i18n.t("baby")[0].img[0]);
+const Home = ({
+  localeData,
+  navigation,
+  getAllPostsStart,
+  posts,
+  isFetching,
+}) => {
+  console.log("Home=== ", posts);
+  const isHomeFocused = useIsFocused();
   const ds = "../../../assets/images/icon.png";
   let images = i18n.t("baby")[0].img;
+  // useEffect(() => {
+  //   isHomeFocused && getAllPostsStart();
+  //   console.log("Sending Data to Word Press____");
+  //   // return () => {
+  //   //   cleanup
+  //   // }
+  // }, [isHomeFocused]);
   return (
     <View style={styles.container}>
-      <Header windowWidth={windowWidth} navigation={navigation} route="Home" />
+      <Header
+        windowWidth={windowWidth}
+        navigation={navigation}
+        route="Home"
+        isLoading={isFetching}
+        refresh={getAllPostsStart}
+      />
       {localeData && Object.keys(localeData).length > 0 ? (
         <ScrollView
           keyboardDismissMode="interactive"
@@ -59,7 +85,10 @@ const Home = ({ localeData, navigation, setLanguage }) => {
                 paddingBottom: 30,
               },
             ]}>
-            <ImageCard section={localeData.home[0]} navigation={navigation}>
+            <ImageCard
+              posts={posts}
+              section={localeData.home[0]}
+              navigation={navigation}>
               <Image
                 style={{
                   width: normalize(100),
@@ -70,7 +99,10 @@ const Home = ({ localeData, navigation, setLanguage }) => {
               />
               <Text style={styles.cardText}> {localeData.home[0].name} </Text>
             </ImageCard>
-            <ImageCard section={localeData.home[1]} navigation={navigation}>
+            <ImageCard
+              posts={posts}
+              section={localeData.home[1]}
+              navigation={navigation}>
               <Image
                 style={{
                   width: normalize(100),
@@ -81,7 +113,10 @@ const Home = ({ localeData, navigation, setLanguage }) => {
               />
               <Text style={styles.cardText}> {localeData.home[1].name} </Text>
             </ImageCard>
-            <ImageCard section={localeData.home[2]} navigation={navigation}>
+            <ImageCard
+              posts={posts}
+              section={localeData.home[2]}
+              navigation={navigation}>
               <Image
                 style={{
                   width: normalize(100),
@@ -92,7 +127,10 @@ const Home = ({ localeData, navigation, setLanguage }) => {
               />
               <Text style={styles.cardText}> {localeData.home[2].name} </Text>
             </ImageCard>
-            <ImageCard section={localeData.home[3]} navigation={navigation}>
+            <ImageCard
+              posts={posts}
+              section={localeData.home[3]}
+              navigation={navigation}>
               <Image
                 style={{
                   width: normalize(100),
@@ -103,7 +141,10 @@ const Home = ({ localeData, navigation, setLanguage }) => {
               />
               <Text style={styles.cardText}> {localeData.home[3].name} </Text>
             </ImageCard>
-            <ImageCard section={localeData.home[4]} navigation={navigation}>
+            <ImageCard
+              posts={posts}
+              section={localeData.home[4]}
+              navigation={navigation}>
               <Image
                 style={{
                   width: normalize(100),
@@ -114,7 +155,10 @@ const Home = ({ localeData, navigation, setLanguage }) => {
               />
               <Text style={styles.cardText}> {localeData.home[4].name} </Text>
             </ImageCard>
-            <ImageCard section={localeData.home[5]} navigation={navigation}>
+            <ImageCard
+              posts={posts}
+              section={localeData.home[5]}
+              navigation={navigation}>
               <Image
                 style={{
                   width: normalize(100),
@@ -170,6 +214,11 @@ const styles = StyleSheet.create({
 const mapStateToProps = createStructuredSelector({
   language: selectLanguage,
   localeData: selectLocaleData,
+  posts: selectGetAllPosts,
+  isFetching: selectIsFetching,
+});
+const mapDispatchToProps = (dispatch) => ({
+  getAllPostsStart: () => dispatch(getAllPostsStart()),
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

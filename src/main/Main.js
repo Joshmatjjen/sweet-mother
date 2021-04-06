@@ -49,7 +49,7 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
         setLocaleData(enDoc);
         break;
       case "ig-NG":
-        setLocaleData(igDoc);
+        setLocaleData(enDoc);
         break;
       default:
         setLocaleData(enDoc);

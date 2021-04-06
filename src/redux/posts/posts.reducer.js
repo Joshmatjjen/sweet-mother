@@ -1,20 +1,21 @@
 import PostsActionTypes from "./posts.types";
 
 const INITIAL_STATE = {
-  join: [],
+  allPosts: [],
   isLoading: null,
+  isFetching: null,
   error: null,
 };
 
 const postsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case PostsActionTypes.CLEAR_POST_DATA:
+    case PostsActionTypes.CLEAR_POSTS_DATA:
       return {
         ...state,
         groups: null,
         isLoading: null,
         isFetching: null,
-        allMessages: [],
+        allPosts: [],
       };
 
     case PostsActionTypes.GET_ALL_POSTS_START:
@@ -27,7 +28,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         isLoading: false,
-        posts: action.payload,
+        allPosts: action.payload,
       };
 
     case PostsActionTypes.GET_ALL_POSTS_FAILURE:

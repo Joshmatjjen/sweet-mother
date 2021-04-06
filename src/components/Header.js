@@ -1,5 +1,11 @@
 import React from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { Icon } from "react-native-elements";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import { connect } from "react-redux";
@@ -15,7 +21,15 @@ const colors = {
   primaryDark: "#0093dc",
 };
 
-const Header = ({ windowWidth, navigation, route, title, setLanguage }) => {
+const Header = ({
+  windowWidth,
+  navigation,
+  route,
+  title,
+  setLanguage,
+  isLoading,
+  refresh,
+}) => {
   let _menu = null;
 
   const setMenuRef = (ref) => {
@@ -72,9 +86,27 @@ const Header = ({ windowWidth, navigation, route, title, setLanguage }) => {
             }}>
             Igbo
           </MenuItem>
-          <MenuItem onPress={hideMenu}>Yoruba</MenuItem>
-          <MenuItem onPress={hideMenu}>Hausa</MenuItem>
-          <MenuItem onPress={hideMenu}>Pigin</MenuItem>
+          <MenuItem
+            onPress={() => {
+              setLanguage("yo-NG");
+              hideMenu();
+            }}>
+            Yoruba
+          </MenuItem>
+          <MenuItem
+            onPress={() => {
+              setLanguage("ha-NG");
+              hideMenu();
+            }}>
+            Hausa
+          </MenuItem>
+          <MenuItem
+            onPress={() => {
+              setLanguage("pum-NG");
+              hideMenu();
+            }}>
+            Pigin
+          </MenuItem>
           {/* <MenuDivider /> */}
         </Menu>
       ) : (
@@ -99,7 +131,26 @@ const Header = ({ windowWidth, navigation, route, title, setLanguage }) => {
         /> */}
       <Text style={styles.headerTitle}>{title ? title : "Sweet Mother"}</Text>
 
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", flexDirection: "row" }}>
+        {!isLoading ? (
+          <TouchableOpacity
+            onPress={() => refresh()}
+            style={{ marginLeft: -20, marginRight: 20 }}>
+            <Icon
+              style
+              size={normalize(25)}
+              name="refresh"
+              type="spinner-refresh"
+              color={colors.primary}
+            />
+          </TouchableOpacity>
+        ) : (
+          <ActivityIndicator
+            style={{ marginLeft: -20, marginRight: 20 }}
+            size={normalize(23)}
+            color={colors.primary}
+          />
+        )}
         {route === "Home" ? (
           <TouchableOpacity onPress={() => console.log("hello")}>
             <Icon
@@ -137,9 +188,27 @@ const Header = ({ windowWidth, navigation, route, title, setLanguage }) => {
               }}>
               Igbo
             </MenuItem>
-            <MenuItem onPress={hideMenu}>Yoruba</MenuItem>
-            <MenuItem onPress={hideMenu}>Hausa</MenuItem>
-            <MenuItem onPress={hideMenu}>Pigin</MenuItem>
+            <MenuItem
+              onPress={() => {
+                setLanguage("yo-NG");
+                hideMenu();
+              }}>
+              Yoruba
+            </MenuItem>
+            <MenuItem
+              onPress={() => {
+                setLanguage("ha-NG");
+                hideMenu();
+              }}>
+              Hausa
+            </MenuItem>
+            <MenuItem
+              onPress={() => {
+                setLanguage("pum-NG");
+                hideMenu();
+              }}>
+              Pigin
+            </MenuItem>
             {/* <MenuDivider /> */}
           </Menu>
         )}

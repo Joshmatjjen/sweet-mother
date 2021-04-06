@@ -1,13 +1,13 @@
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-community/async-storage';
-import settingsReducer from './settings/settings.reducer';
-// import practicesReducer from "./practices/practices.reducer";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-community/async-storage";
+import settingsReducer from "./settings/settings.reducer";
+import postsReducer from "./posts/posts.reducer";
 
 // import userReducer from "./user/user.reducer";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: AsyncStorage,
   // blacklist: ['navigation'],
   // whitelist: ['auth', 'notes'],
@@ -15,8 +15,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
-  // user: userReducer,
-  // practice: practicesReducer,
+  posts: postsReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
