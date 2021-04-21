@@ -9,8 +9,11 @@ const ImageCard = ({ posts, section, navigation, children }) => {
       style={styles.card}
       onPress={() =>
         navigation.navigate("Post", {
-          props: posts.filter((item) => item.acf.category === section.name),
+          props: posts.filter(
+            (item) => item.acf.category === section.sectionLabel,
+          ),
           sectionName: section.name,
+          sectionLabel: section.label,
           sectionId: section.id,
         })
       }>

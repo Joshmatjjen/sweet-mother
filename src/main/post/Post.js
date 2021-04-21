@@ -67,6 +67,7 @@ const Post = ({
   const postData = route.params.props;
   const sectionId = route.params.sectionId;
   const sectionName = route.params.sectionName;
+  const sectionLabel = route.params.sectionLabel;
   const isPostFocused = useIsFocused();
   // const [data, setData] = useState([]);
   const contentWidth = useWindowDimensions().width;
@@ -85,7 +86,7 @@ const Post = ({
 
   useEffect(() => {
     // isHomeFocused && getAllPostsStart();
-    // console.log("Sending Data to Word Press____");
+    console.log("Sending Data to Word Press____", language);
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
       console.log(freeDiskStorage);
       console.log(formatBytes(freeDiskStorage));
@@ -94,7 +95,7 @@ const Post = ({
       // iOS: 17179869184
       // return freeDiskStorage;
     });
-  }, [isPostFocused, FileSystem]);
+  }, [isPostFocused, FileSystem, language]);
 
   function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return "0 Bytes";
@@ -352,16 +353,16 @@ const Post = ({
           paddingTop: 10,
           paddingBottom: 20,
         }}
-        data={posts.filter((item) => item.acf.category === sectionName)}
+        data={posts.filter((item) => item.acf.category === sectionLabel)}
         numColumns={1}
         renderItem={({ item, index }) => (
           <Section
             id={index}
             question={
+              (language === "ha-NG" && item.acf.hausaTitle) ||
               (language === "en-US" && item.acf.englishTitle) ||
               (language === "ig-NG" && item.acf.igboTitle) ||
               (language === "yo-NG" && item.acf.yorubaTitle) ||
-              (language === "ha-NG" && item.acf.hausaTitle) ||
               (language === "pum-NG" && item.acf.pidginTitle)
             }
             answer={

@@ -25,6 +25,9 @@ import { setLanguage, setLocaleData } from "../redux/settings/settings.actions";
 import { createStructuredSelector } from "reselect";
 import enDoc from "../locale/en";
 import igDoc from "../locale/ig";
+import yoDoc from "../locale/yo";
+import haDoc from "../locale/ha";
+import pgDoc from "../locale/pg";
 import Post from "./post/Post";
 
 const arr = [
@@ -52,7 +55,16 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
         setLocaleData(enDoc);
         break;
       case "ig-NG":
-        setLocaleData(enDoc);
+        setLocaleData(igDoc);
+        break;
+      case "yo-NG":
+        setLocaleData(yoDoc);
+        break;
+      case "ha-NG":
+        setLocaleData(haDoc);
+        break;
+      case "pum-NG":
+        setLocaleData(pgDoc);
         break;
       default:
         setLocaleData(enDoc);
@@ -85,8 +97,8 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
       <TouchableOpacity
         style={{
           position: "absolute",
-          bottom: 30,
-          right: 30,
+          bottom: 20,
+          right: 20,
           backgroundColor: colors.primary,
           height: 60,
           width: 60,

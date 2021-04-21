@@ -48,7 +48,6 @@ const Home = ({
   posts,
   isFetching,
 }) => {
-  console.log("Home=== ", posts);
   const isHomeFocused = useIsFocused();
   const ds = "../../../assets/images/icon.png";
   let images = i18n.t("baby")[0].img;
@@ -269,6 +268,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: normalize(13),
     fontFamily: "SofiaProMedium",
+    textTransform: "capitalize",
     textAlign: "center",
     paddingTop: 5,
     marginBottom: -10,
