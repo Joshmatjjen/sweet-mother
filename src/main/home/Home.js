@@ -1,5 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';c
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -8,14 +8,15 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Modal,
 } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, normalize } from "react-native-elements";
 import i18n from "i18n-js";
 import { useIsFocused } from "@react-navigation/native";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import ImageCard from "../../components/imageCard";
-import normalize from "../../utils/normalize";
+// import normalize from "../../utils/normalize";
 import {
   selectLanguage,
   selectLocaleData,
@@ -27,6 +28,7 @@ import {
   selectGetAllPosts,
   selectIsFetching,
 } from "../../redux/posts/posts.selector";
+import * as FileSystem from "expo-file-system";
 
 const colors = {
   text: "#777777",
@@ -50,13 +52,33 @@ const Home = ({
   const isHomeFocused = useIsFocused();
   const ds = "../../../assets/images/icon.png";
   let images = i18n.t("baby")[0].img;
-  // useEffect(() => {
-  //   isHomeFocused && getAllPostsStart();
-  //   console.log("Sending Data to Word Press____");
-  //   // return () => {
-  //   //   cleanup
-  //   // }
-  // }, [isHomeFocused]);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    // isHomeFocused && getAllPostsStart();
+    // console.log("Sending Data to Word Press____");
+    FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
+      console.log(freeDiskStorage);
+      console.log(formatBytes(freeDiskStorage));
+      if (freeDiskStorage < 542780160) setModalVisible(true);
+      // Android: 17179869184
+      // iOS: 17179869184
+      // return freeDiskStorage;
+    });
+  }, [isHomeFocused, FileSystem]);
+
+  function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return "0 Bytes";
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+  }
+
   return (
     <View style={styles.container}>
       <Header
@@ -75,7 +97,7 @@ const Home = ({
           style={{
             zIndex: 0,
             backgroundColor: colors.background,
-            // minHeight: '100%',
+            // minHeight: '110%',
           }}>
           <View
             style={[
@@ -91,7 +113,7 @@ const Home = ({
               navigation={navigation}>
               <Image
                 style={{
-                  width: normalize(100),
+                  width: normalize(110),
                   height: normalize(90),
                   alignSelf: "flex-end",
                 }}
@@ -105,7 +127,7 @@ const Home = ({
               navigation={navigation}>
               <Image
                 style={{
-                  width: normalize(100),
+                  width: normalize(110),
                   height: normalize(90),
                   alignSelf: "flex-start",
                 }}
@@ -119,7 +141,7 @@ const Home = ({
               navigation={navigation}>
               <Image
                 style={{
-                  width: normalize(100),
+                  width: normalize(110),
                   height: normalize(90),
                   alignSelf: "flex-end",
                 }}
@@ -133,7 +155,7 @@ const Home = ({
               navigation={navigation}>
               <Image
                 style={{
-                  width: normalize(100),
+                  width: normalize(110),
                   height: normalize(90),
                   alignSelf: "flex-start",
                 }}
@@ -147,7 +169,7 @@ const Home = ({
               navigation={navigation}>
               <Image
                 style={{
-                  width: normalize(100),
+                  width: normalize(110),
                   height: normalize(90),
                   alignSelf: "flex-end",
                 }}
@@ -161,7 +183,7 @@ const Home = ({
               navigation={navigation}>
               <Image
                 style={{
-                  width: normalize(100),
+                  width: normalize(110),
                   height: normalize(90),
                   alignSelf: "flex-start",
                 }}
@@ -172,6 +194,48 @@ const Home = ({
           </View>
         </ScrollView>
       ) : null}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          // Alert.alert("Modal has been closed.");
+        }}>
+        <View
+          style={{
+            width: windowWidth,
+            height: windowHeight,
+            backgroundColor: "#00000086",
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Icon
+                size={normalize(40)}
+                // raised
+                name="ios-warning-outline"
+                type="ionicon"
+                color="#ff0f0f"
+              />
+              <Text style={styles.modalText}>
+                Warning, Your phone storage is getting too low, please remove
+                some files or apps to free up space
+              </Text>
+
+              <TouchableOpacity
+                style={{
+                  ...styles.openButton,
+                  backgroundColor: colors.primary,
+                }}
+                onPress={() => {
+                  console.log("Hello");
+                  setModalVisible(!modalVisible);
+                }}>
+                <Text style={styles.textStyle}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -208,6 +272,40 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 5,
     marginBottom: -10,
+  },
+  modalView: {
+    marginHorizontal: 20,
+    marginTop: windowHeight / 3,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 25,
+    marginTop: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "white",
+    fontFamily: "SofiaProMedium",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontFamily: "SofiaProMedium",
   },
 });
 

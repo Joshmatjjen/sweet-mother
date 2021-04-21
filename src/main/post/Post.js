@@ -11,6 +11,7 @@ import {
   FlatList,
   useWindowDimensions,
   ActivityIndicator,
+  Modal,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import i18n from "i18n-js";
@@ -34,6 +35,7 @@ import {
   selectIsFetching,
 } from "../../redux/posts/posts.selector";
 import { useIsFocused } from "@react-navigation/native";
+import * as FileSystem from "expo-file-system";
 
 const colors = {
   text: "#777777",
@@ -68,6 +70,7 @@ const Post = ({
   const isPostFocused = useIsFocused();
   // const [data, setData] = useState([]);
   const contentWidth = useWindowDimensions().width;
+  const [modalVisible, setModalVisible] = useState(false);
 
   // const checkSection = () => {
   //   console.log("____ Changing", language);
@@ -80,13 +83,38 @@ const Post = ({
   //   // sectionType.id === 6 && setData(localeData.health);
   // };
 
+  useEffect(() => {
+    // isHomeFocused && getAllPostsStart();
+    // console.log("Sending Data to Word Press____");
+    FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
+      console.log(freeDiskStorage);
+      console.log(formatBytes(freeDiskStorage));
+      if (freeDiskStorage < 542780160) setModalVisible(true);
+      // Android: 17179869184
+      // iOS: 17179869184
+      // return freeDiskStorage;
+    });
+  }, [isPostFocused, FileSystem]);
+
+  function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return "0 Bytes";
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+  }
+
   // useMemo(() => {
   //   // setData([localeData.baby]);
   //   console.log("____ Changing", language);
   //   if (!language) checkSection();
   // }, [language, data]);
   useEffect(() => {
-    isPostFocused && getAllPostsStart();
+    // isPostFocused && getAllPostsStart();
     // if (isPostFocused) clearPostsData();
   }, [isPostFocused]);
 
@@ -100,8 +128,6 @@ const Post = ({
     id,
   }) => {
     const [expanded, setExpanded] = useState(false);
-    console.log("Lang___", language);
-    console.log("Data___", question);
 
     const handlePress = () => setExpanded(!expanded);
     return (
@@ -349,10 +375,51 @@ const Post = ({
             videos={item.acf.videos}
           />
         )}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index.toString()}
         // showsHorizontalScrollIndicator={false}
         // extraData={selected}
       />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          // Alert.alert("Modal has been closed.");
+        }}>
+        <View
+          style={{
+            width: windowWidth,
+            height: windowHeight,
+            backgroundColor: "#00000086",
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Icon
+                size={normalize(40)}
+                // raised
+                name="ios-warning-outline"
+                type="ionicon"
+                color="#ff0f0f"
+              />
+              <Text style={styles.modalText}>
+                Warning, Your phone storage is getting too low, please remove
+                some files or apps to free up space
+              </Text>
+
+              <TouchableOpacity
+                style={{
+                  ...styles.openButton,
+                  backgroundColor: colors.primary,
+                }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}>
+                <Text style={styles.textStyle}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -388,6 +455,40 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 5,
     marginBottom: -10,
+  },
+  modalView: {
+    marginHorizontal: 20,
+    marginTop: windowHeight / 3,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 25,
+    marginTop: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "white",
+    fontFamily: "SofiaProMedium",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontFamily: "SofiaProMedium",
   },
 });
 

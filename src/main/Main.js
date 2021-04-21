@@ -1,15 +1,17 @@
 // import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
   StyleSheet,
   Text,
   View,
   StatusBar,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { REACT_APP_API } from "@env";
+import { Icon, normalize } from "react-native-elements";
 import Home from "./home/Home";
 // import SvgUri from 'expo-svg-uri';
 import DonateImg from "../../assets/images/donate2.svg";
@@ -40,9 +42,10 @@ const colors = {
   primary: "#0093db",
   primaryDark: "#0093dc",
 };
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+const appwidth = windowWidth * 0.9;
 const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
-  console.log(REACT_APP_API);
-
   const langAction = () => {
     switch (language) {
       case "en-US":

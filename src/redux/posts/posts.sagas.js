@@ -22,7 +22,7 @@ export function* willGetAllPosts() {
     const result = yield getPostsApi().then(function (response) {
       return response.data;
     });
-    console.log(result);
+    // console.log(result);
     yield put(getAllPostsSuccess(result));
   } catch (error) {
     console.log(error);
@@ -36,7 +36,7 @@ export function* willGetAllPosts() {
       getAllPostsFailure(
         error.response
           ? error.response.data.errors || error.response.data.errors
-          : eMsg || "Please check your connectivity, And try again",
+          : "Please check your connectivity, And try again",
       ),
     );
   }

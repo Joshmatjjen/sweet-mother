@@ -44,7 +44,6 @@ i18n.locale = Localization.locale;
 
 const App = () => {
   const [isLoaded] = useFonts(customFonts);
-  console.log(i18n.t("home"));
   if (!isLoaded) {
     return <></>;
   }

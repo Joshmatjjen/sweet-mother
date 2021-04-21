@@ -7,7 +7,7 @@ export const getPostsApi = async (token) => {
   //   "Content-Type": "application/json",
   //   Authorization: token,
   // };
-  const url = REACT_APP_API + REACT_APP_GET_POSTS;
+  const url = REACT_APP_API + REACT_APP_GET_POSTS + "?per_page=10000";
   console.log(url);
   // const collectionsMap = await Axios.get(url, { headers });
   const collectionsMap = await Axios.get(url);

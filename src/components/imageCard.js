@@ -4,7 +4,6 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 
 const ImageCard = ({ posts, section, navigation, children }) => {
-  console.log("Section__", section);
   return (
     <TouchableOpacity
       style={styles.card}
