@@ -90,7 +90,7 @@ const Post = ({
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
       console.log(freeDiskStorage);
       console.log(formatBytes(freeDiskStorage));
-      if (freeDiskStorage < 542780160) setModalVisible(true);
+      if (freeDiskStorage < 322780160) setModalVisible(true);
       // Android: 17179869184
       // iOS: 17179869184
       // return freeDiskStorage;

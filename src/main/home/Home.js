@@ -58,8 +58,8 @@ const Home = ({
     // console.log("Sending Data to Word Press____");
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
       console.log(freeDiskStorage);
-      console.log(formatBytes(freeDiskStorage));
-      if (freeDiskStorage < 542780160) setModalVisible(true);
+      console.log(formatBytes(322780160));
+      if (freeDiskStorage < 322780160) setModalVisible(true);
       // Android: 17179869184
       // iOS: 17179869184
       // return freeDiskStorage;
