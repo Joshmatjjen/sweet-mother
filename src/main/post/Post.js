@@ -69,10 +69,7 @@ const Post = ({
   const sectionName = route.params.sectionName;
   const sectionLabel = route.params.sectionLabel;
   const isPostFocused = useIsFocused();
-  const [showVideo, setShowVideo] = useState({
-    show: false,
-    videoId: "",
-  });
+
   const contentWidth = useWindowDimensions().width;
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -132,6 +129,10 @@ const Post = ({
     id,
   }) => {
     const [expanded, setExpanded] = useState(false);
+    const [showVideo, setShowVideo] = useState({
+      show: false,
+      videoId: "",
+    });
 
     const handlePress = () => setExpanded(!expanded);
     return (
@@ -225,11 +226,16 @@ const Post = ({
           {videos ? (
             <TouchableOpacity
               onPress={() => {
-                setExpanded(true);
-                setShowVideo({
-                  show: true,
-                  videoId: videos.url.split("v=")[1],
-                });
+                // setExpanded(true);
+                showVideo.show
+                  ? setShowVideo({
+                      show: false,
+                      videoId: "",
+                    })
+                  : setShowVideo({
+                      show: true,
+                      videoId: videos.url.split("v=")[1],
+                    });
               }}
               style={{
                 flexDirection: "row",
@@ -249,7 +255,7 @@ const Post = ({
                   fontSize: normalize(15),
                   paddingRight: 10,
                 }}>
-                Watch Video Now
+                {showVideo.show ? "Hide Video Now" : "Watch Video Now"}
               </Text>
               <Icon
                 style

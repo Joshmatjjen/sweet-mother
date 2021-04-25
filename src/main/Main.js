@@ -31,6 +31,7 @@ import haDoc from "../locale/ha";
 import pgDoc from "../locale/pg";
 import Post from "./post/Post";
 import Intro from "./intro/Intro";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const arr = [
   {
@@ -83,6 +84,7 @@ const Main = ({
 
   useEffect(() => {
     // setLanguage();
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
     console.log("Changing");
     langAction();
     StatusBar.setBackgroundColor("#ffffff");
