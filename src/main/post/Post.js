@@ -1,7 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';c
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -37,6 +36,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
 import YoutubePlayer from "react-native-youtube-iframe";
+import VideoModal from "../../components/VideoModal";
 
 const colors = {
   text: "#777777",
@@ -64,13 +64,15 @@ const Post = ({
   posts,
   clearPostsData,
 }) => {
-  // console.log("Post=== ", localeData[0]);
   const postData = route.params.props;
   const sectionId = route.params.sectionId;
   const sectionName = route.params.sectionName;
   const sectionLabel = route.params.sectionLabel;
   const isPostFocused = useIsFocused();
-  // const [data, setData] = useState([]);
+  const [showVideo, setShowVideo] = useState({
+    show: false,
+    videoId: "",
+  });
   const contentWidth = useWindowDimensions().width;
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -152,38 +154,6 @@ const Post = ({
             marginBottom: 30,
           }}>
           <View style={{ width: appwidth }}>
-            {/* <HTML
-              source={{ html: htmlContent }}
-              contentWidth={contentWidth}
-              baseFontStyle={{
-                fontSize: normalize(13),
-                fontFamily: "SofiaProLight",
-                color: colors.text,
-              }}
-              ignoredStyles={["font-family", "font-style", "letter-spacing"]}
-              tagsStyles={{
-                i: {
-                  fontFamily: "SofiaProLight",
-                  // fontSize: normalize(26),
-                },
-                p: {
-                  fontFamily: "SofiaProLight",
-                },
-                pre: {
-                  fontFamily: "SofiaProLight",
-                },
-                span: {
-                  fontFamily: "SofiaProLight",
-                },
-              }}
-              classesStyles={{
-                "last-paragraph": {
-                  textAlign: "right",
-                  color: "teal",
-                  fontFamily: "SofiaProLight",
-                },
-              }}
-            /> */}
             <Text
               style={{
                 fontSize: normalize(17),
@@ -226,14 +196,6 @@ const Post = ({
                 }}
               />
             )}
-            {/* <Text
-                style={{
-                  fontSize: normalize(15),
-                  fontFamily: "SofiaProLight",
-                  color: colors.text,
-                }}>
-                {answer}
-              </Text> */}
           </View>
           <View
             style={{
@@ -260,17 +222,48 @@ const Post = ({
                 />
               ))}
           </View>
-          <View>
-            <YoutubePlayer
-              height={300}
-              play={true}
-              videoId={"HsRBsNp_cNw"}
-              // onChangeState={onStateChange}
-            />
-          </View>
-
-          {/* v=HsRBsNp_cNw */}
+          {videos ? (
+            <TouchableOpacity
+              onPress={() => {
+                setExpanded(true);
+                setShowVideo({
+                  show: true,
+                  videoId: videos.url.split("v=")[1],
+                });
+              }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: colors.text + "55",
+                marginTop: 10,
+                paddingHorizontal: 20,
+                paddingVertical: 10,
+              }}>
+              <Text
+                style={{
+                  color: colors.primary,
+                  fontFamily: "SofiaProBold",
+                  textAlign: "center",
+                  fontSize: normalize(15),
+                  paddingRight: 10,
+                }}>
+                Watch Video Now
+              </Text>
+              <Icon
+                style
+                size={normalize(25)}
+                name="ios-play-circle-sharp"
+                type="ionicon"
+                color={colors.primary}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
+        {showVideo.show && (
+          <YoutubePlayer play={true} height={200} videoId={showVideo.videoId} />
+        )}
       </List.Accordion>
     );
   };
@@ -285,20 +278,6 @@ const Post = ({
         isLoading={isFetching}
         refresh={getAllPostsStart}
       />
-      {/* <List.AccordionGroup>
-        <List.Accordion title="Accordion 1" id="1">
-          <List.Item title="Item 1" />
-        </List.Accordion>
-        <List.Accordion title="Accordion 2" id="2">
-          <List.Item title="Item 2" />
-        </List.Accordion>
-        <View>
-          <Text>cfdgdg dgfdgdfghfd</Text>
-          <List.Accordion title="Accordion 3" id="3">
-            <List.Item title="Item 3" />
-          </List.Accordion>
-        </View>
-      </List.AccordionGroup> */}
       <FlatList
         // ref={ref}
         // horizontal={true}
@@ -391,6 +370,9 @@ const Post = ({
         // showsHorizontalScrollIndicator={false}
         // extraData={selected}
       />
+      {/* {showVideo.show && (
+        <VideoModal showVideo={showVideo} setShowVideo={setShowVideo} />
+      )} */}
       <Modal
         animationType="slide"
         transparent={true}
