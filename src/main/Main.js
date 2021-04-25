@@ -18,6 +18,7 @@ import DonateImg from "../../assets/images/donate2.svg";
 import { SvgXml } from "react-native-svg";
 import { connect } from "react-redux";
 import {
+  selectIntro,
   selectLanguage,
   selectLocaleData,
 } from "../redux/settings/settings.selector";
@@ -29,6 +30,7 @@ import yoDoc from "../locale/yo";
 import haDoc from "../locale/ha";
 import pgDoc from "../locale/pg";
 import Post from "./post/Post";
+import Intro from "./intro/Intro";
 
 const arr = [
   {
@@ -48,7 +50,15 @@ const colors = {
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
-const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
+
+const Main = ({
+  setLanguage,
+  setLocaleData,
+  language,
+  localeData,
+  isIntro,
+}) => {
+  const [showIntro, setShowIntro] = useState(true);
   const langAction = () => {
     switch (language) {
       case "en-US":
@@ -81,35 +91,41 @@ const Main = ({ setLanguage, setLocaleData, language, localeData }) => {
   return (
     <>
       <StatusBar backgroundColor="#ffffff" />
-      <NavigationContainer
-      // theme={state.theme}
-      // ref={navigationRef}
-      // onReady={() =>
-      //   (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
-      // }
-      >
-        <Stack.Navigator initialRouteName="Home" headerMode="none">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Post" component={Post} />
-          {/* <Stack.Screen name="MainScreen" component={MainScreen} /> */}
-        </Stack.Navigator>
-      </NavigationContainer>
-      <TouchableOpacity
-        style={{
-          position: "absolute",
-          bottom: 20,
-          right: 20,
-          backgroundColor: colors.primary,
-          height: 60,
-          width: 60,
-          borderRadius: 50,
-          justifyContent: "center",
-          alignItems: "center",
-          elevation: 10,
-        }}
-        onPress={() => console.log("Hello")}>
-        <SvgXml xml={DonateImg} width={40} height={40} />
-      </TouchableOpacity>
+      {!isIntro ? (
+        <>
+          <NavigationContainer
+          // theme={state.theme}
+          // ref={navigationRef}
+          // onReady={() =>
+          //   (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+          // }
+          >
+            <Stack.Navigator initialRouteName="Home" headerMode="none">
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Post" component={Post} />
+              {/* <Stack.Screen name="MainScreen" component={MainScreen} /> */}
+            </Stack.Navigator>
+          </NavigationContainer>
+          <TouchableOpacity
+            style={{
+              position: "absolute",
+              bottom: 20,
+              right: 20,
+              backgroundColor: colors.primary,
+              height: 60,
+              width: 60,
+              borderRadius: 50,
+              justifyContent: "center",
+              alignItems: "center",
+              elevation: 10,
+            }}
+            onPress={() => console.log("Hello")}>
+            <SvgXml xml={DonateImg} width={40} height={40} />
+          </TouchableOpacity>
+        </>
+      ) : (
+        <Intro />
+      )}
     </>
   );
 };
@@ -126,6 +142,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = createStructuredSelector({
   language: selectLanguage,
   localeData: selectLocaleData,
+  isIntro: selectIntro,
 });
 
 const mapDispatchToProps = (dispatch) => ({
