@@ -36,6 +36,7 @@ import {
 } from "../../redux/posts/posts.selector";
 import { useIsFocused } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 const colors = {
   text: "#777777",
@@ -90,12 +91,12 @@ const Post = ({
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
       console.log(freeDiskStorage);
       console.log(formatBytes(freeDiskStorage));
-      if (freeDiskStorage < 322780160) setModalVisible(true);
+      // if (freeDiskStorage < 322780160) setModalVisible(true);
       // Android: 17179869184
       // iOS: 17179869184
       // return freeDiskStorage;
     });
-  }, [isPostFocused, FileSystem, language]);
+  }, [isPostFocused]);
 
   function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return "0 Bytes";
@@ -114,10 +115,10 @@ const Post = ({
   //   console.log("____ Changing", language);
   //   if (!language) checkSection();
   // }, [language, data]);
-  useEffect(() => {
-    // isPostFocused && getAllPostsStart();
-    // if (isPostFocused) clearPostsData();
-  }, [isPostFocused]);
+  // useEffect(() => {
+  //   // isPostFocused && getAllPostsStart();
+  //   // if (isPostFocused) clearPostsData();
+  // }, [isPostFocused]);
 
   const Section = ({
     question,
@@ -259,6 +260,16 @@ const Post = ({
                 />
               ))}
           </View>
+          <View>
+            <YoutubePlayer
+              height={300}
+              play={true}
+              videoId={"HsRBsNp_cNw"}
+              // onChangeState={onStateChange}
+            />
+          </View>
+
+          {/* v=HsRBsNp_cNw */}
         </View>
       </List.Accordion>
     );

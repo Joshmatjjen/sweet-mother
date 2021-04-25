@@ -29,6 +29,7 @@ import {
   selectIsFetching,
 } from "../../redux/posts/posts.selector";
 import * as FileSystem from "expo-file-system";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 const colors = {
   text: "#777777",
@@ -98,6 +99,12 @@ const Home = ({
             backgroundColor: colors.background,
             // minHeight: '110%',
           }}>
+          <YoutubePlayer
+            height={300}
+            play={true}
+            videoId={"HsRBsNp_cNw"}
+            // onChangeState={onStateChange}
+          />
           <View
             style={[
               styles.listData,

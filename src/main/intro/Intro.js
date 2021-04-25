@@ -22,7 +22,7 @@ import {
   selectLocaleData,
 } from "../../redux/settings/settings.selector";
 import Header from "../../components/Header";
-import { setLanguage } from "../../redux/settings/settings.actions";
+import { setLanguage, showIntro } from "../../redux/settings/settings.actions";
 import { getAllPostsStart } from "../../redux/posts/posts.actions";
 import {
   selectGetAllPosts,
@@ -163,7 +163,13 @@ const Intro = ({
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setSwitchState(1)}
+              onPress={() => {
+                defaultLang
+                  ? switchState === 0
+                    ? setSwitchState(1)
+                    : showIntro(false)
+                  : null;
+              }}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -173,18 +179,18 @@ const Intro = ({
               }}>
               <Text
                 style={{
-                  color: colors.primary,
+                  color: defaultLang ? colors.primary : colors.text + "64",
                   fontFamily: "SofiaProSemiBold",
                   paddingRight: 10,
                   fontSize: normalize(15),
                 }}>
-                Continue
+                {switchState === 0 ? "Continue" : "Get Started"}
               </Text>
               <Icon
                 size={normalize(20)}
                 name="ios-arrow-forward-outline"
                 type="ionicon"
-                color={colors.primary}
+                color={defaultLang ? colors.primary : colors.text + "64"}
                 style={{ marginTop: 5 }}
               />
             </TouchableOpacity>
