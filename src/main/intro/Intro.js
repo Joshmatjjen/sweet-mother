@@ -25,7 +25,7 @@ import Header from "../../components/Header";
 import { setLanguage, showIntro } from "../../redux/settings/settings.actions";
 import { getAllPostsStart } from "../../redux/posts/posts.actions";
 import {
-  selectGetAllPosts,
+  // selectGetAllPosts,
   selectIsFetching,
 } from "../../redux/posts/posts.selector";
 import * as FileSystem from "expo-file-system";
@@ -54,7 +54,7 @@ const Intro = ({
   navigation,
   getAllPostsStart,
   setLanguage,
-  posts,
+  // posts,
   isFetching,
   showIntro,
 }) => {
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = createStructuredSelector({
   language: selectLanguage,
   localeData: selectLocaleData,
-  posts: selectGetAllPosts,
+  // posts: selectGetAllPosts,
   isFetching: selectIsFetching,
 });
 const mapDispatchToProps = (dispatch) => ({

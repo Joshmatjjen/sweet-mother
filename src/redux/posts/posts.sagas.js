@@ -3,7 +3,12 @@ import { getPostsApi } from "../../apis/api";
 import PostsActionTypes from "./posts.types";
 import {
   getAllPostsFailure,
-  getAllPostsSuccess,
+  getBabyPostsSuccess,
+  getSiblingPostsSuccess,
+  getMotherPostsSuccess,
+  getSpousePostsSuccess,
+  getSexPostsSuccess,
+  getHealthPostsSuccess,
   setLoading,
   // setPracticeId,
 } from "./posts.actions";
@@ -11,19 +16,31 @@ import {
 
 // const userActive = state => state.user.currentUser;
 // const userToken = (state) => state.user.token.key;
-// const havePracticeId = (state) => state.practice.currentPracticeId;
+const haveBabyPosts = (state) => state.posts.allBabyPosts;
 
-export function* willGetAllPosts() {
-  // const token = yield select(userToken);
+export function* willGetAllPosts({ payload: { category, page } }) {
+  console.log(page);
+  console.log(category);
+  const getBabyPosts = yield select(haveBabyPosts);
   // const currentPracticeId = yield select(havePracticeId);
   // console.log('Do have Id', currentPracticeId);
   // console.log('going in aoi');
   try {
-    const result = yield getPostsApi().then(function (response) {
+    const result = yield getPostsApi(category, page).then(function (response) {
       return response.data;
     });
-    // console.log(result);
-    yield put(getAllPostsSuccess(result));
+    console.log(result);
+    if (category === "Baby") {
+      getBabyPosts
+        ? yield put(
+            getBabyPostsSuccess({
+              page,
+              posts: [getBabyPosts.posts, ...result],
+            }),
+          )
+        : yield put(getBabyPostsSuccess({ page, posts: result }));
+    }
+    // yield put(getBabyPostsSuccess(result));
   } catch (error) {
     console.log(error);
     console.log(error.response);

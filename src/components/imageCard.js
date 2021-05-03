@@ -3,15 +3,12 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Card } from "react-native-elements";
 
-const ImageCard = ({ posts, section, navigation, children }) => {
+const ImageCard = ({ section, navigation, children }) => {
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={() =>
         navigation.navigate("Post", {
-          props: posts.filter(
-            (item) => item.acf.category === section.sectionLabel,
-          ),
           sectionName: section.name,
           sectionLabel: section.label,
           sectionId: section.id,

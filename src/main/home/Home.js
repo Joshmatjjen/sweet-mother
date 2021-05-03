@@ -23,11 +23,11 @@ import {
 } from "../../redux/settings/settings.selector";
 import Header from "../../components/Header";
 import { setLanguage } from "../../redux/settings/settings.actions";
-import { getAllPostsStart } from "../../redux/posts/posts.actions";
 import {
-  selectGetAllPosts,
-  selectIsFetching,
-} from "../../redux/posts/posts.selector";
+  clearPostsData,
+  getAllPostsStart,
+} from "../../redux/posts/posts.actions";
+import { selectIsFetching } from "../../redux/posts/posts.selector";
 import * as FileSystem from "expo-file-system";
 
 const colors = {
@@ -45,8 +45,9 @@ const Home = ({
   localeData,
   navigation,
   getAllPostsStart,
-  posts,
+  // posts,
   isFetching,
+  clearPostsData,
 }) => {
   const isHomeFocused = useIsFocused();
   const ds = "../../../assets/images/icon.png";
@@ -54,11 +55,12 @@ const Home = ({
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
+    // clearPostsData();
     // isHomeFocused && getAllPostsStart();
     // console.log("Sending Data to Word Press____");
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
-      console.log(freeDiskStorage);
-      console.log(formatBytes(322780160));
+      // console.log(freeDiskStorage);
+      // console.log(formatBytes(322780160));
       if (freeDiskStorage < 322780160) setModalVisible(true);
       // Android: 17179869184
       // iOS: 17179869184
@@ -84,8 +86,8 @@ const Home = ({
         windowWidth={windowWidth}
         navigation={navigation}
         route="Home"
-        isLoading={isFetching}
-        refresh={getAllPostsStart}
+        // isLoading={isFetching}
+        // refresh={getAllPostsStart}
       />
       {localeData && Object.keys(localeData).length > 0 ? (
         <ScrollView
@@ -106,10 +108,7 @@ const Home = ({
                 paddingBottom: 30,
               },
             ]}>
-            <ImageCard
-              posts={posts}
-              section={localeData.home[0]}
-              navigation={navigation}>
+            <ImageCard section={localeData.home[0]} navigation={navigation}>
               <Image
                 style={{
                   width: normalize(110),
@@ -120,10 +119,7 @@ const Home = ({
               />
               <Text style={styles.cardText}> {localeData.home[0].name} </Text>
             </ImageCard>
-            <ImageCard
-              posts={posts}
-              section={localeData.home[1]}
-              navigation={navigation}>
+            <ImageCard section={localeData.home[1]} navigation={navigation}>
               <Image
                 style={{
                   width: normalize(110),
@@ -134,10 +130,7 @@ const Home = ({
               />
               <Text style={styles.cardText}> {localeData.home[1].name} </Text>
             </ImageCard>
-            <ImageCard
-              posts={posts}
-              section={localeData.home[2]}
-              navigation={navigation}>
+            <ImageCard section={localeData.home[2]} navigation={navigation}>
               <Image
                 style={{
                   width: normalize(110),
@@ -148,10 +141,7 @@ const Home = ({
               />
               <Text style={styles.cardText}> {localeData.home[2].name} </Text>
             </ImageCard>
-            <ImageCard
-              posts={posts}
-              section={localeData.home[3]}
-              navigation={navigation}>
+            <ImageCard section={localeData.home[3]} navigation={navigation}>
               <Image
                 style={{
                   width: normalize(110),
@@ -162,10 +152,7 @@ const Home = ({
               />
               <Text style={styles.cardText}> {localeData.home[3].name} </Text>
             </ImageCard>
-            <ImageCard
-              posts={posts}
-              section={localeData.home[4]}
-              navigation={navigation}>
+            <ImageCard section={localeData.home[4]} navigation={navigation}>
               <Image
                 style={{
                   width: normalize(110),
@@ -176,10 +163,7 @@ const Home = ({
               />
               <Text style={styles.cardText}> {localeData.home[4].name} </Text>
             </ImageCard>
-            <ImageCard
-              posts={posts}
-              section={localeData.home[5]}
-              navigation={navigation}>
+            <ImageCard section={localeData.home[5]} navigation={navigation}>
               <Image
                 style={{
                   width: normalize(110),
@@ -312,11 +296,11 @@ const styles = StyleSheet.create({
 const mapStateToProps = createStructuredSelector({
   language: selectLanguage,
   localeData: selectLocaleData,
-  posts: selectGetAllPosts,
   isFetching: selectIsFetching,
 });
 const mapDispatchToProps = (dispatch) => ({
   getAllPostsStart: () => dispatch(getAllPostsStart()),
+  clearPostsData: () => dispatch(clearPostsData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

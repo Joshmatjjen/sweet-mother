@@ -30,8 +30,8 @@ import {
   clearPostsData,
 } from "../../redux/posts/posts.actions";
 import {
-  selectGetAllPosts,
   selectIsFetching,
+  selectGetBabyPosts,
 } from "../../redux/posts/posts.selector";
 import { useIsFocused } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
@@ -61,10 +61,11 @@ const Post = ({
   language,
   getAllPostsStart,
   isFetching,
-  posts,
+  babyPosts,
+  siblingPosts,
   clearPostsData,
 }) => {
-  const postData = route.params.props;
+  // const postData = route.params.props;
   const sectionId = route.params.sectionId;
   const sectionName = route.params.sectionName;
   const sectionLabel = route.params.sectionLabel;
@@ -85,11 +86,14 @@ const Post = ({
   // };
 
   useEffect(() => {
-    // isHomeFocused && getAllPostsStart();
+    if (isPostFocused) {
+      if (sectionId === 1 && !babyPosts)
+        getAllPostsStart({ category: "Baby", page: 1 });
+    }
     console.log("Sending Data to Word Press____", language);
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
-      console.log(freeDiskStorage);
-      console.log(formatBytes(freeDiskStorage));
+      // console.log(freeDiskStorage);
+      // console.log(formatBytes(freeDiskStorage));
       // if (freeDiskStorage < 322780160) setModalVisible(true);
       // Android: 17179869184
       // iOS: 17179869184
@@ -281,8 +285,8 @@ const Post = ({
         navigation={navigation}
         route={"Post"}
         title={localeData.home[sectionId - 1].name}
-        isLoading={isFetching}
-        refresh={getAllPostsStart}
+        // isLoading={isFetching}
+        // refresh={getAllPostsStart}
       />
       <FlatList
         // ref={ref}
@@ -349,7 +353,17 @@ const Post = ({
           paddingTop: 10,
           paddingBottom: 20,
         }}
-        data={posts.filter((item) => item.acf.category === sectionLabel)}
+        data={
+          sectionLabel === "Baby" && babyPosts
+            ? babyPosts.posts.filter(
+                (item) => item.acf.category === sectionLabel,
+              )
+            : [] || (sectionLabel === "Sibling" && siblingPosts)
+            ? siblingPosts.posts.filter(
+                (item) => item.acf.category === sectionLabel,
+              )
+            : []
+        }
         numColumns={1}
         renderItem={({ item, index }) => (
           <Section
@@ -496,11 +510,13 @@ const mapStateToProps = createStructuredSelector({
   language: selectLanguage,
   localeData: selectLocaleData,
   isFetching: selectIsFetching,
-  posts: selectGetAllPosts,
+  babyPosts: selectGetBabyPosts,
+  siblingPosts: selectGetSiblingPosts,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAllPostsStart: () => dispatch(getAllPostsStart()),
+  getAllPostsStart: (type, category) =>
+    dispatch(getAllPostsStart(type, category)),
   clearPostsData: () => dispatch(clearPostsData()),
 });
 
