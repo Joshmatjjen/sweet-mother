@@ -29,6 +29,7 @@ const Header = ({
   setLanguage,
   isLoading,
   refresh,
+  languageSetter,
 }) => {
   let _menu = null;
 
@@ -162,55 +163,59 @@ const Header = ({
             />
           </TouchableOpacity>
         ) : (
-          <Menu
-            ref={setMenuRef}
-            button={
-              <TouchableOpacity onPress={showMenu}>
-                <Icon
-                  name="language"
-                  type="font-awesome"
-                  color={colors.primary}
-                  size={normalize(20)}
-                />
-              </TouchableOpacity>
-            }>
-            <MenuItem
-              onPress={() => {
-                setLanguage("en-US");
-                hideMenu();
-              }}>
-              English
-            </MenuItem>
-            <MenuItem
-              onPress={() => {
-                setLanguage("ig-NG");
-                hideMenu();
-              }}>
-              Igbo
-            </MenuItem>
-            <MenuItem
-              onPress={() => {
-                setLanguage("yo-NG");
-                hideMenu();
-              }}>
-              Yoruba
-            </MenuItem>
-            <MenuItem
-              onPress={() => {
-                setLanguage("ha-NG");
-                hideMenu();
-              }}>
-              Hausa
-            </MenuItem>
-            <MenuItem
-              onPress={() => {
-                setLanguage("pum-NG");
-                hideMenu();
-              }}>
-              Pigin
-            </MenuItem>
-            {/* <MenuDivider /> */}
-          </Menu>
+          <>
+            {languageSetter ? (
+              <Menu
+                ref={setMenuRef}
+                button={
+                  <TouchableOpacity onPress={showMenu}>
+                    <Icon
+                      name="language"
+                      type="font-awesome"
+                      color={colors.primary}
+                      size={normalize(20)}
+                    />
+                  </TouchableOpacity>
+                }>
+                <MenuItem
+                  onPress={() => {
+                    setLanguage("en-US");
+                    hideMenu();
+                  }}>
+                  English
+                </MenuItem>
+                <MenuItem
+                  onPress={() => {
+                    setLanguage("ig-NG");
+                    hideMenu();
+                  }}>
+                  Igbo
+                </MenuItem>
+                <MenuItem
+                  onPress={() => {
+                    setLanguage("yo-NG");
+                    hideMenu();
+                  }}>
+                  Yoruba
+                </MenuItem>
+                <MenuItem
+                  onPress={() => {
+                    setLanguage("ha-NG");
+                    hideMenu();
+                  }}>
+                  Hausa
+                </MenuItem>
+                <MenuItem
+                  onPress={() => {
+                    setLanguage("pum-NG");
+                    hideMenu();
+                  }}>
+                  Pigin
+                </MenuItem>
+                {/* <MenuDivider /> */}
+              </Menu>
+            ) : null}
+          </>
         )}
       </View>
     </View>

@@ -29,12 +29,15 @@ import {
 } from "../../redux/posts/posts.actions";
 import { selectIsFetching } from "../../redux/posts/posts.selector";
 import * as FileSystem from "expo-file-system";
+import DonateImg from "../../../assets/images/donate2.svg";
+import { SvgXml } from "react-native-svg";
 
 const colors = {
   text: "#777777",
   background: "#FFFFFF",
   primary: "#0093db",
   primaryDark: "#0093dc",
+  secondary: "#FFA500",
 };
 
 const windowWidth = Dimensions.get("window").width;
@@ -219,6 +222,22 @@ const Home = ({
           </View>
         </View>
       </Modal>
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          bottom: 20,
+          right: 20,
+          backgroundColor: colors.secondary,
+          height: 60,
+          width: 60,
+          borderRadius: 50,
+          justifyContent: "center",
+          alignItems: "center",
+          elevation: 10,
+        }}
+        onPress={() => navigation.navigate("Donate")}>
+        <SvgXml xml={DonateImg} width={40} height={40} />
+      </TouchableOpacity>
     </View>
   );
 };

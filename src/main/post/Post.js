@@ -32,11 +32,18 @@ import {
 import {
   selectIsFetching,
   selectGetBabyPosts,
+  selectGetSiblingPosts,
+  selectGetMotherPosts,
+  selectGetSpousePosts,
+  selectGetSexPosts,
+  selectGetHealthPosts,
 } from "../../redux/posts/posts.selector";
 import { useIsFocused } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
 import YoutubePlayer from "react-native-youtube-iframe";
 import VideoModal from "../../components/VideoModal";
+import DonateImg from "../../../assets/images/donate2.svg";
+import { SvgXml } from "react-native-svg";
 
 const colors = {
   text: "#777777",
@@ -45,6 +52,7 @@ const colors = {
   background: "#FFFFFF",
   primary: "#0093db",
   primaryDark: "#0093dc",
+  secondary: "#FFA500",
 };
 const htmlContent = `
 <ul>\n<li><span data-contrast=\"auto\">Nye <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">og<\/span><span data-contrast=\"auto\">wu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">dok<\/span><span data-contrast=\"auto\">ita<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">si<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">gi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nye<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">y<\/span><span data-contrast=\"auto\">a<\/span><span data-contrast=\"auto\">.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559739&quot;:0,&quot;335559740&quot;:240}\"> <\/span><\/li>\n<li><span data-contrast=\"auto\">Kporo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ga<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ulogwu<\/span><span data-contrast=\"auto\">, ma <\/span><span data-contrast=\"auto\">nye<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ogwu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">dika<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">dokita<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">si<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">tuzie<\/span><span data-contrast=\"auto\"> aka.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559739&quot;:0,&quot;335559740&quot;:240}\"> <\/span><\/li>\n<li><span data-contrast=\"auto\">Nye <\/span><span data-contrast=\"auto\">mmiri<\/span><span data-contrast=\"auto\"> d<\/span><span data-contrast=\"auto\">i <\/span><span data-contrast=\"auto\">nari-nari<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">esiri<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">n’oku<\/span><span data-contrast=\"auto\">. Jiri <\/span><span data-contrast=\"auto\">mm<\/span><span data-contrast=\"auto\">ri<\/span><span data-contrast=\"auto\"> di ‘<\/span><span data-contrast=\"auto\">nari<\/span><span data-contrast=\"auto\">-‘<\/span><span data-contrast=\"auto\">n<\/span><span data-contrast=\"auto\">ari<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">esiri<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">n’oku<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">saa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ahu.Nke<\/span><span data-contrast=\"auto\"> a <\/span><span data-contrast=\"auto\">ga-eme<\/span><span data-contrast=\"auto\"> ka ahu <\/span><span data-contrast=\"auto\">juo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ngwa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ngwa<\/span><span data-contrast=\"auto\">.<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">Biko <\/span><span data-contrast=\"auto\">eji<\/span><span data-contrast=\"auto\">la<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">mmiri<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">saa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nwa<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ohuru<\/span><span data-contrast=\"auto\"> ahu ma <\/span><span data-contrast=\"auto\">obu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nye<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> ka <\/span><span data-contrast=\"auto\">onuo<\/span><span data-contrast=\"auto\">,<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">nkea<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">puru<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ime<\/span><span data-contrast=\"auto\"> ka <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">tuo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\">.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559685&quot;:1440,&quot;335559739&quot;:0,&quot;335559740&quot;:240,&quot;335559991&quot;:720}\"> <\/span><\/li>\n<li><span data-contrast=\"auto\">Nye <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ihe<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">onunu<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ndi<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ozo<\/span><span data-contrast=\"auto\">,<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">ij<\/span><span data-contrast=\"auto\">i<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">mee<\/span><span data-contrast=\"auto\"> ka ahu <\/span><span data-contrast=\"auto\">ya<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">juo<\/span><span data-contrast=\"auto\"> <\/span><span data-contrast=\"auto\">oyi<\/span><span data-contrast=\"auto\"> site <\/span><span data-contrast=\"auto\">n’ime<\/span><span data-contrast=\"auto\">.<\/span><span data-ccp-props=\"{&quot;201341983&quot;:0,&quot;335551550&quot;:6,&quot;335551620&quot;:6,&quot;335559685&quot;:1440,&quot;335559739&quot;:0,&quot;335559740&quot;:240,&quot;335559991&quot;:720}\"> <\/span><\/li>\n<\/ul>\n
@@ -63,6 +71,10 @@ const Post = ({
   isFetching,
   babyPosts,
   siblingPosts,
+  motherPosts,
+  spousePosts,
+  sexPosts,
+  healthPosts,
   clearPostsData,
 }) => {
   // const postData = route.params.props;
@@ -87,8 +99,24 @@ const Post = ({
 
   useEffect(() => {
     if (isPostFocused) {
-      if (sectionId === 1 && !babyPosts)
+      sectionId === 1 &&
+        !babyPosts &&
         getAllPostsStart({ category: "Baby", page: 1 });
+      sectionId === 2 &&
+        !siblingPosts &&
+        getAllPostsStart({ category: "Sibling", page: 1 });
+      sectionId === 3 &&
+        !motherPosts &&
+        getAllPostsStart({ category: "Mother", page: 1 });
+      sectionId === 4 &&
+        !spousePosts &&
+        getAllPostsStart({ category: "Spouse", page: 1 });
+      sectionId === 5 &&
+        !sexPosts &&
+        getAllPostsStart({ category: "Sex", page: 1 });
+      sectionId === 6 &&
+        !healthPosts &&
+        getAllPostsStart({ category: "Health", page: 1 });
     }
     console.log("Sending Data to Word Press____", language);
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
@@ -285,6 +313,7 @@ const Post = ({
         navigation={navigation}
         route={"Post"}
         title={localeData.home[sectionId - 1].name}
+        languageSetter={true}
         // isLoading={isFetching}
         // refresh={getAllPostsStart}
       />
@@ -358,8 +387,24 @@ const Post = ({
             ? babyPosts.posts.filter(
                 (item) => item.acf.category === sectionLabel,
               )
-            : [] || (sectionLabel === "Sibling" && siblingPosts)
+            : sectionLabel === "Sibling" && siblingPosts
             ? siblingPosts.posts.filter(
+                (item) => item.acf.category === sectionLabel,
+              )
+            : sectionLabel === "Mother" && motherPosts
+            ? motherPosts.posts.filter(
+                (item) => item.acf.category === sectionLabel,
+              )
+            : sectionLabel === "Spouse" && spousePosts
+            ? spousePosts.posts.filter(
+                (item) => item.acf.category === sectionLabel,
+              )
+            : sectionLabel === "Sex" && sexPosts
+            ? sexPosts.posts.filter(
+                (item) => item.acf.category === sectionLabel,
+              )
+            : sectionLabel === "Health" && healthPosts
+            ? healthPosts.posts.filter(
                 (item) => item.acf.category === sectionLabel,
               )
             : []
@@ -434,6 +479,22 @@ const Post = ({
           </View>
         </View>
       </Modal>
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          bottom: 20,
+          right: 20,
+          backgroundColor: colors.secondary,
+          height: 60,
+          width: 60,
+          borderRadius: 50,
+          justifyContent: "center",
+          alignItems: "center",
+          elevation: 10,
+        }}
+        onPress={() => navigation.navigate("Donate")}>
+        <SvgXml xml={DonateImg} width={40} height={40} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -512,6 +573,10 @@ const mapStateToProps = createStructuredSelector({
   isFetching: selectIsFetching,
   babyPosts: selectGetBabyPosts,
   siblingPosts: selectGetSiblingPosts,
+  motherPosts: selectGetMotherPosts,
+  spousePosts: selectGetSpousePosts,
+  sexPosts: selectGetSexPosts,
+  healthPosts: selectGetHealthPosts,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -14,8 +14,6 @@ import { REACT_APP_API } from "@env";
 import { Icon, normalize } from "react-native-elements";
 import Home from "./home/Home";
 // import SvgUri from 'expo-svg-uri';
-import DonateImg from "../../assets/images/donate2.svg";
-import { SvgXml } from "react-native-svg";
 import { connect } from "react-redux";
 import {
   selectIntro,
@@ -32,6 +30,7 @@ import pgDoc from "../locale/pg";
 import Post from "./post/Post";
 import Intro from "./intro/Intro";
 import * as ScreenOrientation from "expo-screen-orientation";
+import Donate from "./donate/Donate";
 
 const arr = [
   {
@@ -47,6 +46,7 @@ const colors = {
   background: "#FFFFFF",
   primary: "#0093db",
   primaryDark: "#0093dc",
+  secondary: "#FFA500",
 };
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -105,25 +105,11 @@ const Main = ({
             <Stack.Navigator initialRouteName="Home" headerMode="none">
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Post" component={Post} />
+              <Stack.Screen name="Donate" component={Donate} />
+
               {/* <Stack.Screen name="MainScreen" component={MainScreen} /> */}
             </Stack.Navigator>
           </NavigationContainer>
-          <TouchableOpacity
-            style={{
-              position: "absolute",
-              bottom: 20,
-              right: 20,
-              backgroundColor: colors.primary,
-              height: 60,
-              width: 60,
-              borderRadius: 50,
-              justifyContent: "center",
-              alignItems: "center",
-              elevation: 10,
-            }}
-            onPress={() => console.log("Hello")}>
-            <SvgXml xml={DonateImg} width={40} height={40} />
-          </TouchableOpacity>
         </>
       ) : (
         <Intro />
