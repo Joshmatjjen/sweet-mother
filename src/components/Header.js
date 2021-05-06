@@ -135,7 +135,7 @@ const Header = ({
       <View style={{ alignItems: "center", flexDirection: "row" }}>
         {!isLoading ? (
           <TouchableOpacity
-            onPress={() => refresh()}
+            onPress={refresh}
             style={{ marginLeft: -20, marginRight: 20 }}>
             <Icon
               style

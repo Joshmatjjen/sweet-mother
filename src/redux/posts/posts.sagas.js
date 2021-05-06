@@ -45,7 +45,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
         ? yield put(
             getBabyPostsSuccess({
               page,
-              posts: [getBabyPosts.posts, ...result],
+              posts: [...getBabyPosts.posts, ...result],
             }),
           )
         : yield put(getBabyPostsSuccess({ page, posts: result }));
@@ -54,7 +54,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
         ? yield put(
             getSiblingPostsSuccess({
               page,
-              posts: [getSiblingPosts.posts, ...result],
+              posts: [...getSiblingPosts.posts, ...result],
             }),
           )
         : yield put(getSiblingPostsSuccess({ page, posts: result }));

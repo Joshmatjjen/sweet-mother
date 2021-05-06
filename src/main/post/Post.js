@@ -129,6 +129,11 @@ const Post = ({
     });
   }, [isPostFocused]);
 
+  useEffect(() => {
+    console.log("Posts", siblingPosts);
+    console.log(sectionLabel);
+  }, [siblingPosts]);
+
   function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return "0 Bytes";
 
@@ -314,8 +319,15 @@ const Post = ({
         route={"Post"}
         title={localeData.home[sectionId - 1].name}
         languageSetter={true}
-        // isLoading={isFetching}
-        // refresh={getAllPostsStart}
+        isLoading={isFetching}
+        refresh={() => {
+          sectionId === 1 && getAllPostsStart({ category: "Baby", page: 1 });
+          sectionId === 2 && getAllPostsStart({ category: "Sibling", page: 1 });
+          sectionId === 3 && getAllPostsStart({ category: "Mother", page: 1 });
+          sectionId === 4 && getAllPostsStart({ category: "Spouse", page: 1 });
+          sectionId === 5 && getAllPostsStart({ category: "Sex", page: 1 });
+          sectionId === 6 && getAllPostsStart({ category: "Health", page: 1 });
+        }}
       />
       <FlatList
         // ref={ref}
@@ -432,6 +444,52 @@ const Post = ({
           />
         )}
         keyExtractor={(item, index) => index.toString()}
+        onEndReachedThreshold={0.7}
+        onEndReached={(props) => {
+          console.log(props);
+          // if (distanceFromEnd < 0.5) {
+          sectionId === 1 &&
+            getAllPostsStart({ category: "Baby", page: babyPosts.page + 1 });
+          sectionId === 2 &&
+            getAllPostsStart({
+              category: "Sibling",
+              page: siblingPosts.posts + 1,
+            });
+          sectionId === 3 &&
+            getAllPostsStart({
+              category: "Mother",
+              page: motherPosts.posts + 1,
+            });
+          sectionId === 4 &&
+            getAllPostsStart({
+              category: "Spouse",
+              page: spousePosts.posts + 1,
+            });
+          sectionId === 5 &&
+            getAllPostsStart({ category: "Sex", page: sexPosts.posts + 1 });
+          sectionId === 6 &&
+            getAllPostsStart({
+              category: "Health",
+              page: healthPosts.posts + 1,
+            });
+          // }
+        }}
+        ListFooterComponent={() => (
+          <>
+            {(babyPosts && isFetching) ||
+            (siblingPosts && isFetching) ||
+            (motherPosts && isFetching) ||
+            (spousePosts && isFetching) ||
+            (sexPosts && isFetching) ||
+            (healthPosts && isFetching) ? (
+              <ActivityIndicator
+                style={{}}
+                size={normalize(35)}
+                color={colors.primary}
+              />
+            ) : null}
+          </>
+        )}
         // showsHorizontalScrollIndicator={false}
         // extraData={selected}
       />
