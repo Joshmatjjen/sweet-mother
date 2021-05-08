@@ -10,10 +10,10 @@ export const getPostsApi = async (category, page) => {
   const url =
     REACT_APP_API +
     REACT_APP_GET_POSTS +
-    "?filter[meta_key]=category&filter[meta_value]=" +
-    category +
-    "&order=DESC&per_page=20&page=" +
-    page;
+    "?page=" +
+    page +
+    "&order=DESC&per_page=20&filter[meta_key]=category&filter[meta_value]=" +
+    category;
   console.log(url);
   // const collectionsMap = await Axios.get(url, { headers });
   const collectionsMap = await Axios.get(url);

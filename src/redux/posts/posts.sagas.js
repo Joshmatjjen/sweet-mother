@@ -63,7 +63,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
         ? yield put(
             getMotherPostsSuccess({
               page,
-              posts: [getMotherPosts.posts, ...result],
+              posts: [...getMotherPosts.posts, ...result],
             }),
           )
         : yield put(getMotherPostsSuccess({ page, posts: result }));
@@ -72,7 +72,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
         ? yield put(
             getSpousePostsSuccess({
               page,
-              posts: [getSpousePosts.posts, ...result],
+              posts: [...getSpousePosts.posts, ...result],
             }),
           )
         : yield put(getSpousePostsSuccess({ page, posts: result }));
@@ -81,7 +81,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
         ? yield put(
             getSexPostsSuccess({
               page,
-              posts: [getSexPosts.posts, ...result],
+              posts: [...getSexPosts.posts, ...result],
             }),
           )
         : yield put(getSexPostsSuccess({ page, posts: result }));
@@ -90,7 +90,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
         ? yield put(
             getHealthPostsSuccess({
               page,
-              posts: [getHealthPosts.posts, ...result],
+              posts: [...getHealthPosts.posts, ...result],
             }),
           )
         : yield put(getHealthPostsSuccess({ page, posts: result }));

@@ -85,6 +85,7 @@ const Post = ({
 
   const contentWidth = useWindowDimensions().width;
   const [modalVisible, setModalVisible] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // const checkSection = () => {
   //   console.log("____ Changing", language);
@@ -98,6 +99,10 @@ const Post = ({
   // };
 
   useEffect(() => {
+    console.log(
+      "Sending Data to Word Press____",
+      sectionId === 1 && babyPosts && !isFetching,
+    );
     if (isPostFocused) {
       sectionId === 1 &&
         !babyPosts &&
@@ -118,7 +123,7 @@ const Post = ({
         !healthPosts &&
         getAllPostsStart({ category: "Health", page: 1 });
     }
-    console.log("Sending Data to Word Press____", language);
+
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
       // console.log(freeDiskStorage);
       // console.log(formatBytes(freeDiskStorage));
@@ -171,7 +176,10 @@ const Post = ({
       videoId: "",
     });
 
-    const handlePress = () => setExpanded(!expanded);
+    const handlePress = () => {
+      setExpanded(!expanded);
+      // setIsExpanded(!isExpanded);
+    };
     return (
       <List.Accordion
         title={question}
@@ -182,7 +190,7 @@ const Post = ({
         titleStyle={{
           color: colors.text,
           fontFamily: "SofiaProMedium",
-          fontSize: normalize(15),
+          fontSize: normalize(16),
         }}>
         <View
           style={{
@@ -197,6 +205,7 @@ const Post = ({
                 fontSize: normalize(17),
                 fontFamily: "SofiaProMedium",
                 color: colors.text,
+                marginBottom: 10,
               }}>
               {question}
             </Text>
@@ -205,7 +214,7 @@ const Post = ({
                 source={{ html: answer }}
                 contentWidth={contentWidth}
                 baseFontStyle={{
-                  fontSize: normalize(13),
+                  fontSize: normalize(14.5),
                   fontFamily: "SofiaProLight",
                   color: colors.text,
                 }}
@@ -444,51 +453,159 @@ const Post = ({
           />
         )}
         keyExtractor={(item, index) => index.toString()}
-        onEndReachedThreshold={0.7}
+        onEndReachedThreshold={0.01}
         onEndReached={(props) => {
           console.log(props);
-          // if (distanceFromEnd < 0.5) {
-          sectionId === 1 &&
-            getAllPostsStart({ category: "Baby", page: babyPosts.page + 1 });
-          sectionId === 2 &&
-            getAllPostsStart({
-              category: "Sibling",
-              page: siblingPosts.posts + 1,
-            });
-          sectionId === 3 &&
-            getAllPostsStart({
-              category: "Mother",
-              page: motherPosts.posts + 1,
-            });
-          sectionId === 4 &&
-            getAllPostsStart({
-              category: "Spouse",
-              page: spousePosts.posts + 1,
-            });
-          sectionId === 5 &&
-            getAllPostsStart({ category: "Sex", page: sexPosts.posts + 1 });
-          sectionId === 6 &&
-            getAllPostsStart({
-              category: "Health",
-              page: healthPosts.posts + 1,
-            });
-          // }
+          if (props.distanceFromEnd > 0) {
+            sectionId === 1 &&
+              getAllPostsStart({ category: "Baby", page: babyPosts.page + 1 });
+            sectionId === 2 &&
+              getAllPostsStart({
+                category: "Sibling",
+                page: siblingPosts.page + 1,
+              });
+            sectionId === 3 &&
+              getAllPostsStart({
+                category: "Mother",
+                page: motherPosts.page + 1,
+              });
+            sectionId === 4 &&
+              getAllPostsStart({
+                category: "Spouse",
+                page: spousePosts.page + 1,
+              });
+            sectionId === 5 &&
+              getAllPostsStart({ category: "Sex", page: sexPosts.page + 1 });
+            sectionId === 6 &&
+              getAllPostsStart({
+                category: "Health",
+                page: healthPosts.page + 1,
+              });
+          }
         }}
         ListFooterComponent={() => (
-          <>
-            {(babyPosts && isFetching) ||
-            (siblingPosts && isFetching) ||
-            (motherPosts && isFetching) ||
-            (spousePosts && isFetching) ||
-            (sexPosts && isFetching) ||
-            (healthPosts && isFetching) ? (
-              <ActivityIndicator
-                style={{}}
-                size={normalize(35)}
-                color={colors.primary}
-              />
+          <View style={{ paddingBottom: 10 }}>
+            {(sectionId === 1 &&
+              babyPosts &&
+              babyPosts.posts.length >= 20 &&
+              !isFetching) ||
+            (sectionId === 2 &&
+              siblingPosts &&
+              siblingPosts.posts.length >= 20 &&
+              !isFetching) ||
+            (sectionId === 3 &&
+              motherPosts &&
+              motherPosts.posts.length >= 20 &&
+              !isFetching) ||
+            (sectionId === 4 &&
+              spousePosts &&
+              spousePosts.posts.length >= 20 &&
+              !isFetching) ||
+            (sectionId === 5 &&
+              sexPosts &&
+              sexPosts.posts.length >= 20 &&
+              !isFetching) ||
+            (sectionId === 6 &&
+              healthPosts &&
+              healthPosts.posts.length >= 20 &&
+              !isFetching) ? (
+              <TouchableOpacity
+                onPress={() => {
+                  sectionId === 1 &&
+                    getAllPostsStart({
+                      category: "Baby",
+                      page: babyPosts.page + 1,
+                    });
+                  sectionId === 2 &&
+                    getAllPostsStart({
+                      category: "Sibling",
+                      page: siblingPosts.page + 1,
+                    });
+                  sectionId === 3 &&
+                    getAllPostsStart({
+                      category: "Mother",
+                      page: motherPosts.page + 1,
+                    });
+                  sectionId === 4 &&
+                    getAllPostsStart({
+                      category: "Spouse",
+                      page: spousePosts.page + 1,
+                    });
+                  sectionId === 5 &&
+                    getAllPostsStart({
+                      category: "Sex",
+                      page: sexPosts.page + 1,
+                    });
+                  sectionId === 6 &&
+                    getAllPostsStart({
+                      category: "Health",
+                      page: healthPosts.page + 1,
+                    });
+                  sectionId === 1 &&
+                    getAllPostsStart({
+                      category: "Baby",
+                      page: babyPosts.page + 1,
+                    });
+                  sectionId === 2 &&
+                    getAllPostsStart({
+                      category: "Sibling",
+                      page: siblingPosts.page + 1,
+                    });
+                  sectionId === 3 &&
+                    getAllPostsStart({
+                      category: "Mother",
+                      page: motherPosts.page + 1,
+                    });
+                  sectionId === 4 &&
+                    getAllPostsStart({
+                      category: "Spouse",
+                      page: spousePosts.page + 1,
+                    });
+                  sectionId === 5 &&
+                    getAllPostsStart({
+                      category: "Sex",
+                      page: sexPosts.page + 1,
+                    });
+                  sectionId === 6 &&
+                    getAllPostsStart({
+                      category: "Health",
+                      page: healthPosts.page + 1,
+                    });
+                }}
+                style={{
+                  backgroundColor: colors.primary,
+                  alignSelf: "center",
+                  marginTop: 10,
+                  borderRadius: 10,
+                }}>
+                <Text
+                  style={{
+                    fontSize: normalize(14),
+                    fontFamily: "SofiaProLight",
+                    color: "white",
+                    textAlign: "center",
+                    paddingHorizontal: 10,
+                    paddingVertical: 3,
+                  }}>
+                  Load more
+                </Text>
+              </TouchableOpacity>
             ) : null}
-          </>
+            <>
+              {(sectionId === 1 && babyPosts && isFetching) ||
+              (sectionId === 2 && siblingPosts && isFetching) ||
+              (sectionId === 3 && motherPosts && isFetching) ||
+              (sectionId === 4 && spousePosts && isFetching) ||
+              (sectionId === 5 && sexPosts && isFetching) ||
+              (sectionId === 6 && healthPosts && isFetching) ? (
+                <ActivityIndicator
+                  style={{}}
+                  size={normalize(35)}
+                  color={colors.primary}
+                />
+              ) : null}
+            </>
+          </View>
         )}
         // showsHorizontalScrollIndicator={false}
         // extraData={selected}
