@@ -1,7 +1,7 @@
-import SettingsActionTypes from './settings.types';
+import SettingsActionTypes from "./settings.types";
 
 const INITIAL_STATE = {
-  language: 'en-US',
+  language: "en-US",
   localeData: {},
   onScroll: null,
   speedDownloadActive: false,
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   intro: true,
   firstLunch: true,
   mont: null,
-  wpStat: 0,
+  donate: true,
 };
 
 const settingsReducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +24,11 @@ const settingsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         language: action.payload,
+      };
+    case SettingsActionTypes.SET_DONATE:
+      return {
+        ...state,
+        donate: action.payload,
       };
     case SettingsActionTypes.SET_LOCALE_DATA:
       return {

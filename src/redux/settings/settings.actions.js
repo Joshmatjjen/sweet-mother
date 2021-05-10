@@ -62,7 +62,7 @@ export const setMont = (state) => ({
   type: SettingsActionTypes.SET_MONT,
   payload: state,
 });
-export const setWpStat = (state) => ({
-  type: SettingsActionTypes.SET_WP_STAT,
+export const setDonate = (state) => ({
+  type: SettingsActionTypes.SET_DONATE,
   payload: state,
 });

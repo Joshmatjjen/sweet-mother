@@ -40,6 +40,7 @@ import {
 } from "../../redux/posts/posts.selector";
 import { useIsFocused } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
+import { StatusBar } from "react-native";
 
 const colors = {
   text: "#777777",
@@ -54,7 +55,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
-const Donate = ({ navigation }) => {
+const Donate = ({ navigation, localeData }) => {
   const [isRef, setIsRef] = useState();
   const [onError, setOnError] = useState(false);
   const isPostFocused = useIsFocused();
@@ -62,7 +63,10 @@ const Donate = ({ navigation }) => {
   const contentWidth = useWindowDimensions().width;
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {}, [isPostFocused]);
+  useEffect(() => {
+    StatusBar.setBackgroundColor("#F4F6F8");
+    StatusBar.setBarStyle("dark-content");
+  }, [isPostFocused]);
 
   // console.log(isRef);
   // console.log(onError);
@@ -73,7 +77,7 @@ const Donate = ({ navigation }) => {
         windowWidth={windowWidth}
         navigation={navigation}
         route={"Post"}
-        title={"Donate"}
+        title={localeData.screen[1]}
         isLoading={loading}
         languageSetter={false}
         refresh={() => isRef.reload()}

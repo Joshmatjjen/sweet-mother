@@ -51,12 +51,12 @@ const Main = ({ language }) => {
     // setLanguage();
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
     console.log("Changing");
-    StatusBar.setBackgroundColor("#ffffff");
+    StatusBar.setBackgroundColor("#F4F6F8");
     StatusBar.setBarStyle("dark-content");
   }, [language]);
   return (
     <>
-      <StatusBar backgroundColor="#ffffff" />
+      <StatusBar backgroundColor="#F4F6F8" />
       <Stack.Navigator initialRouteName="SettingsScreen" headerMode="none">
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="AboutScreen" component={AboutScreen} />

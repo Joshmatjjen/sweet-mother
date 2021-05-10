@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import ImageCard from "../../components/imageCard";
 import normalize from "../../utils/normalize";
 import {
+  selectDonate,
   selectLanguage,
   selectLocaleData,
 } from "../../redux/settings/settings.selector";
@@ -76,6 +77,7 @@ const Post = ({
   sexPosts,
   healthPosts,
   clearPostsData,
+  donate,
 }) => {
   // const postData = route.params.props;
   const sectionId = route.params.sectionId;
@@ -654,22 +656,24 @@ const Post = ({
           </View>
         </View>
       </Modal>
-      <TouchableOpacity
-        style={{
-          position: "absolute",
-          bottom: 20,
-          right: 20,
-          backgroundColor: colors.secondary,
-          height: 60,
-          width: 60,
-          borderRadius: 50,
-          justifyContent: "center",
-          alignItems: "center",
-          elevation: 10,
-        }}
-        onPress={() => navigation.navigate("Donate")}>
-        <SvgXml xml={DonateImg} width={40} height={40} />
-      </TouchableOpacity>
+      {donate && (
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            bottom: 20,
+            right: 20,
+            backgroundColor: colors.secondary,
+            height: 60,
+            width: 60,
+            borderRadius: 50,
+            justifyContent: "center",
+            alignItems: "center",
+            elevation: 10,
+          }}
+          onPress={() => navigation.navigate("Donate")}>
+          <SvgXml xml={DonateImg} width={40} height={40} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -752,6 +756,7 @@ const mapStateToProps = createStructuredSelector({
   spousePosts: selectGetSpousePosts,
   sexPosts: selectGetSexPosts,
   healthPosts: selectGetHealthPosts,
+  donate: selectDonate,
 });
 
 const mapDispatchToProps = (dispatch) => ({

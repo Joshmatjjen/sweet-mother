@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 const selectSettings = (state) => state.settings;
 
@@ -62,9 +62,9 @@ export const selectMont = createSelector(
   [selectSettings],
   (settings) => settings.mont,
 );
-export const selectWpStat = createSelector(
+export const selectDonate = createSelector(
   [selectSettings],
-  (settings) => settings.wpStat,
+  (settings) => settings.donate,
 );
 
 // export const selectToken = createSelector([selectUser], (user) => user.token);
