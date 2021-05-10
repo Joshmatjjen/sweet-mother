@@ -30,6 +30,7 @@ const Header = ({
   isLoading,
   refresh,
   languageSetter,
+  hideRefresh,
 }) => {
   let _menu = null;
 
@@ -133,7 +134,7 @@ const Header = ({
       <Text style={styles.headerTitle}>{title ? title : "Sweet Mother"}</Text>
 
       <View style={{ alignItems: "center", flexDirection: "row" }}>
-        {!isLoading ? (
+        {!isLoading && !hideRefresh ? (
           <TouchableOpacity
             onPress={refresh}
             style={{ marginLeft: -20, marginRight: 20 }}>
@@ -146,14 +147,18 @@ const Header = ({
             />
           </TouchableOpacity>
         ) : (
-          <ActivityIndicator
-            style={{ marginLeft: -20, marginRight: 20 }}
-            size={normalize(23)}
-            color={colors.primary}
-          />
+          <>
+            {!hideRefresh ? (
+              <ActivityIndicator
+                style={{ marginLeft: -20, marginRight: 20 }}
+                size={normalize(23)}
+                color={colors.primary}
+              />
+            ) : null}
+          </>
         )}
         {route === "Home" ? (
-          <TouchableOpacity onPress={() => console.log("hello")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
             <Icon
               style
               // raised

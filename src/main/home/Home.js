@@ -89,6 +89,7 @@ const Home = ({
         windowWidth={windowWidth}
         navigation={navigation}
         route="Home"
+        hideRefresh={true}
         // isLoading={isFetching}
         // refresh={getAllPostsStart}
       />

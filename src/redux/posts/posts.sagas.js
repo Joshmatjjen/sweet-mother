@@ -41,7 +41,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
     });
     console.log(result);
     if (category === "Baby") {
-      getBabyPosts
+      getBabyPosts && page !== 1
         ? yield put(
             getBabyPostsSuccess({
               page,
@@ -50,7 +50,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
           )
         : yield put(getBabyPostsSuccess({ page, posts: result }));
     } else if (category === "Sibling") {
-      getSiblingPosts
+      getSiblingPosts && page !== 1
         ? yield put(
             getSiblingPostsSuccess({
               page,
@@ -59,7 +59,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
           )
         : yield put(getSiblingPostsSuccess({ page, posts: result }));
     } else if (category === "Mother") {
-      getMotherPosts
+      getMotherPosts && page !== 1
         ? yield put(
             getMotherPostsSuccess({
               page,
@@ -68,7 +68,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
           )
         : yield put(getMotherPostsSuccess({ page, posts: result }));
     } else if (category === "Spouse") {
-      getSpousePosts
+      getSpousePosts && page !== 1
         ? yield put(
             getSpousePostsSuccess({
               page,
@@ -77,7 +77,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
           )
         : yield put(getSpousePostsSuccess({ page, posts: result }));
     } else if (category === "Sex") {
-      getSexPosts
+      getSexPosts && page !== 1
         ? yield put(
             getSexPostsSuccess({
               page,
@@ -86,7 +86,7 @@ export function* willGetAllPosts({ payload: { category, page } }) {
           )
         : yield put(getSexPostsSuccess({ page, posts: result }));
     } else if (category === "Health") {
-      getHealthPosts
+      getHealthPosts && page !== 1
         ? yield put(
             getHealthPostsSuccess({
               page,
