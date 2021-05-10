@@ -46,7 +46,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
-const Main = ({ language }) => {
+const Settings = ({ language }) => {
   useEffect(() => {
     // setLanguage();
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
@@ -88,4 +88,4 @@ const mapDispatchToProps = (dispatch) => ({
   setLocaleData: (data) => dispatch(setLocaleData(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

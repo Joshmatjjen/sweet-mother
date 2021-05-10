@@ -77,7 +77,7 @@ const Donate = ({ navigation, localeData }) => {
         windowWidth={windowWidth}
         navigation={navigation}
         route={"Post"}
-        title={localeData.screen[1]}
+        title={localeData.screen[0]}
         isLoading={loading}
         languageSetter={false}
         refresh={() => isRef.reload()}

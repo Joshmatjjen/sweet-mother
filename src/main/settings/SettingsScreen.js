@@ -40,6 +40,9 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
 import { setDonate } from "../../redux/settings/settings.actions";
+import DonateImg from "../../../assets/images/donate2.svg";
+import { SvgXml } from "react-native-svg";
+import * as WebBrowser from "expo-web-browser";
 
 const colors = {
   text: "#777777",
@@ -48,6 +51,7 @@ const colors = {
   background: "#FFFFFF",
   primary: "#0093db",
   primaryDark: "#0093dc",
+  secondary: "#FFA500",
 };
 
 const windowWidth = Dimensions.get("window").width;
@@ -165,14 +169,19 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
             }}>
             {localeData.intro.setting3}
           </Text>
-          <Text
-            style={{
-              color: colors.primary,
-              fontSize: normalize(15),
-              fontFamily: "SofiaProMedium",
-            }}>
-            https://hedenngo.org/
-          </Text>
+          <TouchableOpacity
+            onPress={() =>
+              WebBrowser.openBrowserAsync("https://hedenngo.org/")
+            }>
+            <Text
+              style={{
+                color: colors.primary,
+                fontSize: normalize(15),
+                fontFamily: "SofiaProMedium",
+              }}>
+              https://hedenngo.org/
+            </Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -246,56 +255,24 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
           </View>
         </View>
       </ScrollView>
-      {onError && !loading && (
-        <View
+
+      {donate && (
+        <TouchableOpacity
           style={{
             position: "absolute",
-            top: "8%",
-            left: "0%",
-            backgroundColor: "white",
-            height: "100%",
-            width: "100%",
+            bottom: 20,
+            right: 20,
+            backgroundColor: colors.secondary,
+            height: 60,
+            width: 60,
+            borderRadius: 50,
             justifyContent: "center",
-            paddingBottom: 100,
-          }}>
-          <Icon
-            style
-            size={normalize(45)}
-            name="wifi-off"
-            type="material-icons"
-            color={colors.text}
-          />
-          <Text
-            style={{
-              fontSize: normalize(17),
-              fontFamily: "SofiaProMedium",
-              color: colors.text,
-              textAlign: "center",
-            }}>
-            {"Page not found \n Check your internet connection"}
-          </Text>
-          <TouchableOpacity
-            onPress={() => isRef.reload()}
-            style={{
-              backgroundColor: colors.primary,
-              width: 80,
-              alignSelf: "center",
-              marginTop: 10,
-              borderRadius: 10,
-            }}>
-            <Text
-              style={{
-                fontSize: normalize(15),
-                fontFamily: "SofiaProMedium",
-                color: "white",
-                textAlign: "center",
-                paddingHorizontal: 10,
-                paddingVertical: 3,
-              }}>
-              Reload
-            </Text>
-          </TouchableOpacity>
-        </View>
+            alignItems: "center",
+            elevation: 10,
+          }}
+          onPress={() => navigation.navigate("Donate")}>
+          <SvgXml xml={DonateImg} width={40} height={40} />
+        </TouchableOpacity>
       )}
     </View>
   );
