@@ -119,7 +119,7 @@ const Intro = ({
                   fontFamily={"SofiaProMedium"}
                   onPress={() => {
                     setDefaultLang(item.label);
-                    getAllPostsStart();
+                    getAllPostsStart({ category: "Baby", page: 1 });
                     setLanguage(item.langCode);
                   }}
                 />
@@ -241,7 +241,8 @@ const mapStateToProps = createStructuredSelector({
   isFetching: selectIsFetching,
 });
 const mapDispatchToProps = (dispatch) => ({
-  getAllPostsStart: () => dispatch(getAllPostsStart()),
+  getAllPostsStart: (type, category) =>
+    dispatch(getAllPostsStart(type, category)),
   setLanguage: (data) => dispatch(setLanguage(data)),
   showIntro: (data) => dispatch(showIntro(data)),
 });

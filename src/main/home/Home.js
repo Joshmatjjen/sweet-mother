@@ -48,7 +48,6 @@ const appwidth = windowWidth * 0.9;
 const Home = ({
   localeData,
   navigation,
-  getAllPostsStart,
   donate,
   isFetching,
   clearPostsData,
