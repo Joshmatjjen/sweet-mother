@@ -369,7 +369,26 @@ const Post = ({
                 No internet connection
               </Text>
               <TouchableOpacity
-                onPress={() => getAllPostsStart()}
+                onPress={() => {
+                  sectionId === 1 &&
+                    !babyPosts &&
+                    getAllPostsStart({ category: "Baby", page: 1 });
+                  sectionId === 2 &&
+                    !siblingPosts &&
+                    getAllPostsStart({ category: "Sibling", page: 1 });
+                  sectionId === 3 &&
+                    !motherPosts &&
+                    getAllPostsStart({ category: "Mother", page: 1 });
+                  sectionId === 4 &&
+                    !spousePosts &&
+                    getAllPostsStart({ category: "Spouse", page: 1 });
+                  sectionId === 5 &&
+                    !sexPosts &&
+                    getAllPostsStart({ category: "Sex", page: 1 });
+                  sectionId === 6 &&
+                    !healthPosts &&
+                    getAllPostsStart({ category: "Health", page: 1 });
+                }}
                 style={{
                   backgroundColor: colors.primary,
                   width: 80,
