@@ -477,7 +477,7 @@ const Post = ({
         onEndReachedThreshold={0.01}
         onEndReached={(props) => {
           console.log(props);
-          if (props.distanceFromEnd > 0) {
+          if (props.distanceFromEnd > 0 && !isFetching) {
             sectionId === 1 &&
               getAllPostsStart({ category: "Baby", page: babyPosts.page + 1 });
             sectionId === 2 &&

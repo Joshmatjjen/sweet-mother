@@ -27,6 +27,7 @@ import { setLanguage } from "../../redux/settings/settings.actions";
 import {
   clearPostsData,
   getAllPostsStart,
+  setLoading,
 } from "../../redux/posts/posts.actions";
 import { selectIsFetching } from "../../redux/posts/posts.selector";
 import * as FileSystem from "expo-file-system";
@@ -51,6 +52,7 @@ const Home = ({
   donate,
   isFetching,
   clearPostsData,
+  setLoading,
 }) => {
   const isHomeFocused = useIsFocused();
   const ds = "../../../assets/images/icon.png";
@@ -59,7 +61,7 @@ const Home = ({
 
   useEffect(() => {
     // clearPostsData();
-    // isHomeFocused && getAllPostsStart();
+    isHomeFocused && setLoading(false);
     // console.log("Sending Data to Word Press____");
     FileSystem.getFreeDiskStorageAsync().then((freeDiskStorage) => {
       // console.log(freeDiskStorage);
@@ -324,6 +326,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   getAllPostsStart: () => dispatch(getAllPostsStart()),
   clearPostsData: () => dispatch(clearPostsData()),
+  setLoading: (act) => dispatch(setLoading(act)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
