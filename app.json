@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "sweet-mother",
+    "name": "Sweet Mother",
     "slug": "sweet-mother",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.sweetmother",
-      "buildNumber": "0.0.7"
+      "buildNumber": "0.0.8"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,7 +27,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.sweetmother",
-      "versionCode": 7,
+      "versionCode": 8,
       "enableDangerousExperimentalLeanBuilds": true
     },
     "web": {
