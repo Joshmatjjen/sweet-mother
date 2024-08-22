@@ -55,7 +55,7 @@ const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
 const AboutScreen = ({ navigation }) => {
-  const [isRef, setIsRef] = useState();
+  const isRef = useRef();
   const [onError, setOnError] = useState(false);
   const isPostFocused = useIsFocused();
 
@@ -76,7 +76,7 @@ const AboutScreen = ({ navigation }) => {
         title={"SettingsScreen"}
         isLoading={loading}
         languageSetter={false}
-        refresh={() => isRef.reload()}
+        refresh={() => isRef?.current?.reload()}
       />
       {onError && !loading && (
         <View
@@ -107,7 +107,7 @@ const AboutScreen = ({ navigation }) => {
             {"Page not found \n Check your internet connection"}
           </Text>
           <TouchableOpacity
-            onPress={() => isRef.reload()}
+            onPress={() => isRef?.current?.reload()}
             style={{
               backgroundColor: colors.primary,
               width: 80,

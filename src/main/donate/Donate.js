@@ -56,7 +56,7 @@ const windowHeight = Dimensions.get("window").height;
 const appwidth = windowWidth * 0.9;
 
 const Donate = ({ navigation, localeData }) => {
-  const [isRef, setIsRef] = useState();
+  const isRef = useRef();
   const [onError, setOnError] = useState(false);
   const isPostFocused = useIsFocused();
 
@@ -68,7 +68,7 @@ const Donate = ({ navigation, localeData }) => {
     StatusBar.setBarStyle("dark-content");
   }, [isPostFocused]);
 
-  // console.log(isRef);
+  console.log("Ref--", isRef);
   // console.log(onError);
 
   return (
@@ -80,7 +80,7 @@ const Donate = ({ navigation, localeData }) => {
         title={localeData.screen[0]}
         isLoading={loading}
         languageSetter={false}
-        refresh={() => isRef.reload()}
+        refresh={() => isRef?.current?.reload()}
       />
       <WebView
         source={{
@@ -98,7 +98,7 @@ const Donate = ({ navigation, localeData }) => {
           setOnError(true);
         }}
         pullToRefreshEnabled={true}
-        ref={(ref) => setIsRef(ref)}
+        ref={isRef}
       />
       {onError && !loading && (
         <View
@@ -129,7 +129,7 @@ const Donate = ({ navigation, localeData }) => {
             {"Page not found \n Check your internet connection"}
           </Text>
           <TouchableOpacity
-            onPress={() => isRef.reload()}
+            onPress={() => isRef?.current?.reload()}
             style={{
               backgroundColor: colors.primary,
               width: 80,

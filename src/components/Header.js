@@ -161,8 +161,7 @@ const Header = ({
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
             <Icon
               style
-              // raised
-              name="ios-settings"
+              name="settings-sharp"
               type="ionicon"
               color={colors.primary}
             />

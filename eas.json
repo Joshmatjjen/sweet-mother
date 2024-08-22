@@ -1,0 +1,51 @@
+{
+  "cli": {
+    "version": ">= 7.8.5"
+  },
+  "build": {
+    "development": {
+      "env": {
+        "STAGE": "development",
+        "SCHEME": "sweet-mother",
+        "PACKAGE_NAME": "com.sweetmother"
+      },
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "developmentClient": true,
+      "ios": {
+        "resourceClass": "m1-medium",
+        "image": "latest"
+      }
+    },
+    
+    "production": {
+      "env": {
+        "STAGE": "production",
+        "SCHEME": "vendoir",
+        "PACKAGE_NAME": "com.sweetmother"
+      },
+      "distribution": "store",
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "ios": {
+        "buildConfiguration": "Release",
+        "image": "latest"
+      }
+    }
+  },
+  "submit": {
+    "development": {
+      "android": {
+        "releaseStatus": "draft"
+      }
+    },
+    "production": {
+      "android": {
+        "releaseStatus": "draft"
+      }
+    }
+  }
+}
