@@ -98,7 +98,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
             style={{
               color: colors.text,
               fontSize: normalize(15),
-              fontFamily: "SofiaProMedium",
+              fontFamily: "PoppinsMedium",
               // paddingRight: -100,
               width: "80%",
             }}>
@@ -137,7 +137,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
             style={{
               color: colors.text,
               fontSize: normalize(15),
-              fontFamily: "SofiaProMedium",
+              fontFamily: "PoppinsMedium",
               // paddingRight: -100,
               width: "80%",
             }}>
@@ -147,7 +147,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
             style={{
               color: colors.primary,
               fontSize: normalize(15),
-              fontFamily: "SofiaProMedium",
+              fontFamily: "PoppinsMedium",
             }}>
             0.0.1
           </Text>
@@ -164,7 +164,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
             style={{
               color: colors.text,
               fontSize: normalize(15),
-              fontFamily: "SofiaProMedium",
+              fontFamily: "PoppinsMedium",
               // paddingRight: -100,
             }}>
             {localeData.intro.setting3}
@@ -177,7 +177,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
               style={{
                 color: colors.primary,
                 fontSize: normalize(15),
-                fontFamily: "SofiaProMedium",
+                fontFamily: "PoppinsMedium",
               }}>
               https://hedenngo.org/
             </Text>
@@ -208,7 +208,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
               style={{
                 color: colors.primary,
                 fontSize: normalize(17),
-                fontFamily: "SofiaProSemiBold",
+                fontFamily: "PoppinsSemiBold",
                 paddingBottom: 20,
               }}>
               Sweet Mother
@@ -217,7 +217,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
               style={{
                 color: colors.text,
                 fontSize: normalize(13),
-                fontFamily: "SofiaProMedium",
+                fontFamily: "PoppinsMedium",
                 textTransform: "capitalize",
                 // textAlign: "center",
                 marginBottom: 30,
@@ -237,7 +237,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
               style={{
                 color: colors.primary,
                 fontSize: normalize(17),
-                fontFamily: "SofiaProSemiBold",
+                fontFamily: "PoppinsSemiBold",
               }}>
               Heden
             </Text>
@@ -245,7 +245,7 @@ const SettingsScreen = ({ navigation, localeData, donate, setDonate }) => {
               style={{
                 color: colors.text,
                 fontSize: normalize(13),
-                fontFamily: "SofiaProMedium",
+                fontFamily: "PoppinsMedium",
                 textTransform: "capitalize",
                 // textAlign: "center",
                 lineHeight: 22,

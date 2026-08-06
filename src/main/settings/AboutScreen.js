@@ -100,7 +100,7 @@ const AboutScreen = ({ navigation }) => {
           <Text
             style={{
               fontSize: normalize(17),
-              fontFamily: "SofiaProMedium",
+              fontFamily: "PoppinsMedium",
               color: colors.text,
               textAlign: "center",
             }}>
@@ -118,7 +118,7 @@ const AboutScreen = ({ navigation }) => {
             <Text
               style={{
                 fontSize: normalize(15),
-                fontFamily: "SofiaProMedium",
+                fontFamily: "PoppinsMedium",
                 color: "white",
                 textAlign: "center",
                 paddingHorizontal: 10,

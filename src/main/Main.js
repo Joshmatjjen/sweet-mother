@@ -103,7 +103,10 @@ const Main = ({
           //   (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
           // }
           >
-            <Stack.Navigator initialRouteName="Home" headerMode="none">
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{ headerShown: false }}
+            >
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Post" component={Post} />
               <Stack.Screen name="Donate" component={Donate} />

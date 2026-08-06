@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: colors.text,
     fontSize: normalize(18),
-    fontFamily: "SofiaProSemiBold",
+    fontFamily: "PoppinsSemiBold",
     paddingVertical: 10,
     textAlign: "center",
     alignSelf: "center",
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     color: colors.text,
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textAlign: "center",
     paddingTop: 5,
     marginBottom: -10,

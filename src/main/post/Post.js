@@ -191,7 +191,7 @@ const Post = ({
         style={{ width: windowWidth }}
         titleStyle={{
           color: colors.text,
-          fontFamily: "SofiaProMedium",
+          fontFamily: "PoppinsMedium",
           fontSize: normalize(16),
         }}>
         <View
@@ -205,7 +205,7 @@ const Post = ({
             <Text
               style={{
                 fontSize: normalize(17),
-                fontFamily: "SofiaProMedium",
+                fontFamily: "PoppinsMedium",
                 color: colors.text,
                 marginBottom: 10,
               }}>
@@ -215,32 +215,32 @@ const Post = ({
               <HTML
                 source={{ html: answer }}
                 contentWidth={contentWidth}
-                baseFontStyle={{
+                baseStyle={{
                   fontSize: normalize(14.5),
-                  fontFamily: "SofiaProLight",
+                  fontFamily: "PoppinsLight",
                   color: colors.text,
                 }}
                 ignoredStyles={["font-family", "font-style", "letter-spacing"]}
                 tagsStyles={{
                   i: {
-                    fontFamily: "SofiaProLight",
+                    fontFamily: "PoppinsLight",
                     // fontSize: normalize(26),
                   },
                   p: {
-                    fontFamily: "SofiaProLight",
+                    fontFamily: "PoppinsLight",
                   },
                   pre: {
-                    fontFamily: "SofiaProLight",
+                    fontFamily: "PoppinsLight",
                   },
                   span: {
-                    fontFamily: "SofiaProLight",
+                    fontFamily: "PoppinsLight",
                   },
                 }}
                 classesStyles={{
                   "last-paragraph": {
                     textAlign: "right",
                     color: "teal",
-                    fontFamily: "SofiaProLight",
+                    fontFamily: "PoppinsLight",
                   },
                 }}
               />
@@ -298,7 +298,7 @@ const Post = ({
               <Text
                 style={{
                   color: colors.primary,
-                  fontFamily: "SofiaProBold",
+                  fontFamily: "PoppinsBold",
                   textAlign: "center",
                   fontSize: normalize(15),
                   paddingRight: 10,
@@ -308,7 +308,7 @@ const Post = ({
               <Icon
                 style
                 size={normalize(25)}
-                name="ios-play-circle-sharp"
+                name="play-circle-sharp"
                 type="ionicon"
                 color={colors.primary}
               />
@@ -363,7 +363,7 @@ const Post = ({
               <Text
                 style={{
                   fontSize: normalize(17),
-                  fontFamily: "SofiaProMedium",
+                  fontFamily: "PoppinsMedium",
                   color: colors.text,
                 }}>
                 No internet connection
@@ -399,7 +399,7 @@ const Post = ({
                 <Text
                   style={{
                     fontSize: normalize(15),
-                    fontFamily: "SofiaProMedium",
+                    fontFamily: "PoppinsMedium",
                     color: "white",
                     textAlign: "center",
                     paddingHorizontal: 10,
@@ -602,7 +602,7 @@ const Post = ({
                 <Text
                   style={{
                     fontSize: normalize(14),
-                    fontFamily: "SofiaProLight",
+                    fontFamily: "PoppinsLight",
                     color: "white",
                     textAlign: "center",
                     paddingHorizontal: 10,
@@ -652,7 +652,7 @@ const Post = ({
               <Icon
                 size={normalize(40)}
                 // raised
-                name="ios-warning-outline"
+                name="warning-outline"
                 type="ionicon"
                 color="#ff0f0f"
               />
@@ -708,7 +708,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: colors.text,
     fontSize: normalize(18),
-    fontFamily: "SofiaProBold",
+    fontFamily: "PoppinsBold",
     paddingVertical: 10,
     textAlign: "center",
     alignSelf: "center",
@@ -724,7 +724,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     color: colors.text,
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textAlign: "center",
     paddingTop: 5,
     marginBottom: -10,
@@ -755,13 +755,13 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
   },
 });
 

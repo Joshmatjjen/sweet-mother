@@ -201,7 +201,7 @@ const Home = ({
               <Icon
                 size={normalize(40)}
                 // raised
-                name="ios-warning-outline"
+                name="warning-outline"
                 type="ionicon"
                 color="#ff0f0f"
               />
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: colors.text,
     fontSize: normalize(18),
-    fontFamily: "SofiaProBold",
+    fontFamily: "PoppinsBold",
     paddingVertical: 10,
     textAlign: "center",
     alignSelf: "center",
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   cardText: {
     color: colors.text,
     fontSize: normalize(13),
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textTransform: "capitalize",
     textAlign: "center",
     paddingTop: 5,
@@ -307,13 +307,13 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
   },
 });
 

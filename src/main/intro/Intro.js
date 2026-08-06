@@ -107,7 +107,7 @@ const Intro = ({
                         defaultLang === item.label
                           ? colors.primary
                           : colors.text,
-                      fontFamily: "SofiaProSemiBold",
+                      fontFamily: "PoppinsSemiBold",
                       fontSize: normalize(14),
                       marginLeft: 15,
                     },
@@ -116,7 +116,7 @@ const Intro = ({
                   uncheckedIcon="circle-o"
                   checkedColor={colors.primary}
                   checked={defaultLang === item.label}
-                  fontFamily={"SofiaProMedium"}
+                  fontFamily={"PoppinsMedium"}
                   onPress={() => {
                     setDefaultLang(item.label);
                     getAllPostsStart({ category: "Baby", page: 1 });
@@ -146,15 +146,14 @@ const Intro = ({
               }}>
               <Icon
                 size={normalize(20)}
-                name="ios-arrow-back-outline"
+                name="arrow-back-outline"
                 type="ionicon"
                 color={colors.primary}
-                style={{ marginTop: 5 }}
               />
               <Text
                 style={{
                   color: colors.primary,
-                  fontFamily: "SofiaProSemiBold",
+                  fontFamily: "PoppinsSemiBold",
                   paddingLeft: 10,
                   fontSize: normalize(15),
                 }}>
@@ -180,7 +179,7 @@ const Intro = ({
               <Text
                 style={{
                   color: defaultLang ? colors.primary : colors.text + "64",
-                  fontFamily: "SofiaProSemiBold",
+                  fontFamily: "PoppinsSemiBold",
                   paddingRight: 10,
                   fontSize: normalize(15),
                 }}>
@@ -188,10 +187,9 @@ const Intro = ({
               </Text>
               <Icon
                 size={normalize(20)}
-                name="ios-arrow-forward-outline"
+                name="arrow-forward-outline"
                 type="ionicon"
                 color={defaultLang ? colors.primary : colors.text + "64"}
-                style={{ marginTop: 5 }}
               />
             </TouchableOpacity>
           </View>
@@ -207,12 +205,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 50,
     // paddingBottom: 50,
   },
   headerTitle: {
     color: colors.text,
     fontSize: normalize(18),
-    fontFamily: "SofiaProBold",
+    fontFamily: "PoppinsBold",
     paddingVertical: 10,
     textAlign: "center",
     alignSelf: "center",
@@ -220,7 +219,7 @@ const styles = StyleSheet.create({
   subHeaderTitle: {
     color: colors.text,
     fontSize: normalize(16),
-    fontFamily: "SofiaProSemiBold",
+    fontFamily: "PoppinsSemiBold",
     paddingVertical: 10,
     textAlign: "center",
     alignSelf: "center",
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
   textStyle: {
     color: colors.text,
     fontSize: normalize(13),
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textTransform: "capitalize",
     textAlign: "center",
   },

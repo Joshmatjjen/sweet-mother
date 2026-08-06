@@ -3,9 +3,16 @@ import React, { useCallback, useEffect, useState } from "react";
 // import App from "./App";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import * as Font from "expo-font";
 import { store, persistor } from "./src/redux/store";
-import { useFonts } from "@use-expo/font";
+import {
+  useFonts,
+  Poppins_300Light,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_900Black,
+} from "@expo-google-fonts/poppins";
 import * as Localization from "expo-localization";
 import i18n from "i18n-js";
 import enDoc from "./src/locale/en";
@@ -24,13 +31,12 @@ import Main from "./src/main/Main";
 // global.FormData = global.originalFormData || global.FormData;
 // import { StatusBar } from "expo-status-bar";
 const customFonts = {
-  // add as many fonts as you want here ....
-  SofiaProMedium: require("./assets/fonts/SofiaProMedium.ttf"),
-  SofiaProLight: require("./assets/fonts/SofiaProLight.ttf"),
-  SofiaProSemiBold: require("./assets/fonts/SofiaProSemiBold.ttf"),
-  SofiaProBold: require("./assets/fonts/SofiaProBold.ttf"),
-  SofiaProMediumItalic: require("./assets/fonts/SofiaProMedium-Italic.ttf"),
-  SofiaProBlack: require("./assets/fonts/SofiaProBlack.ttf"),
+  PoppinsLight: Poppins_300Light,
+  PoppinsMedium: Poppins_500Medium,
+  PoppinsSemiBold: Poppins_600SemiBold,
+  PoppinsBold: Poppins_700Bold,
+  PoppinsMediumItalic: Poppins_500Medium_Italic,
+  PoppinsBlack: Poppins_900Black,
 };
 
 // Set the key-value pairs for the different languages you want to support.

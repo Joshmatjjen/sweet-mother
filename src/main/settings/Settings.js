@@ -57,7 +57,10 @@ const Settings = ({ language }) => {
   return (
     <>
       <StatusBar backgroundColor="#F4F6F8" />
-      <Stack.Navigator initialRouteName="SettingsScreen" headerMode="none">
+      <Stack.Navigator
+        initialRouteName="SettingsScreen"
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="AboutScreen" component={AboutScreen} />
 

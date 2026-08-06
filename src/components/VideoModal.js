@@ -169,13 +169,13 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
     textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontFamily: "SofiaProMedium",
+    fontFamily: "PoppinsMedium",
   },
 });
 
